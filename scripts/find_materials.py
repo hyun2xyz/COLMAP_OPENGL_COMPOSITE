@@ -254,6 +254,9 @@ def new_shot(args):
     save_json(target, cfg)
     out = contact_sheet(clip, Path(work)/args.name/"source/plate_sheet.jpg", args.start, args.duration)
     print(json.dumps(dict(shot=str(target), clip=str(clip), **meta, sheet=str(out)), ensure_ascii=False, indent=2))
+    if cfg["ground"].get("topdown"):
+        print(f"Note: {args.like} looks straight down (ground.topdown). If this camera looks forward, delete "
+              "ground.topdown from the new shot file.")
     print(f"Next: open the sheet, then `python -m pipeline composite {args.name}` "
           "(run solve through scripts/jobs.py on slow machines).")
 

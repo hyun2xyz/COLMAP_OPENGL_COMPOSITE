@@ -25,26 +25,45 @@ def main(cfg, work, args):
     idx = min(by_index, key=lambda k: abs(k-len(s["frames"])//2))
     im = by_index[idx]
     c = np.array(s["frames"][idx]["matrixWorld"]).reshape(4, 4).T
-    cloud, pixels = [], []
+    if g.get("roi"):
+        region = g["roi"]
+    elif g.get("topdown"):
+        region = [.25, .3, .75, .7]
+    else:
+        region = [.18, .63, .82, .96]
+    x0, y0, x1, y1 = region
+    cloud, pixels, usable = [], [], []
     for pt in im.points2D:
-        x, y = pt.xy
-        if g.get("roi"):
-            x0, y0, x1, y1 = g["roi"]
-            inside = x0*W < x < x1*W and y0*H < y < y1*H
-        elif g.get("topdown"):
-            inside = .3*H < y < .7*H and .25*W < x < .75*W
-        else:
-            inside = .63*H < y < .96*H and .18*W < x < .82*W
-        if not pt.has_point3D() or not inside:
+        if not pt.has_point3D():
             continue
         v = r.points3D[pt.point3D_id]
         if v.error > 1.2 or v.track.length() < 8:
             continue
-        cloud.append(v.xyz)
-        pixels.append(pt.xy)
+        x, y = pt.xy
+        usable.append((x, y))
+        if x0*W < x < x1*W and y0*H < y < y1*H:
+            cloud.append(v.xyz)
+            pixels.append(pt.xy)
     cloud, pixels = np.array(cloud), np.array(pixels)
+
+    def candidates(message):
+        """Show every usable landmark, the region and a 0.1 grid, so ground.roi can be chosen by eye."""
+        vis = cv2.imread(str(frame_path(d, idx)))
+        for k in range(1, 10):
+            cv2.line(vis, (0, int(H*k/10)), (W, int(H*k/10)), (255, 255, 255), 1)
+            cv2.line(vis, (int(W*k/10), 0), (int(W*k/10), H), (255, 255, 255), 1)
+            cv2.putText(vis, f"{k/10:.1f}", (4, int(H*k/10)-4), cv2.FONT_HERSHEY_SIMPLEX, .5, (255, 255, 255), 1)
+            cv2.putText(vis, f"{k/10:.1f}", (int(W*k/10)+3, 14), cv2.FONT_HERSHEY_SIMPLEX, .5, (255, 255, 255), 1)
+        for x, y in usable:
+            cv2.circle(vis, (int(round(x)), int(round(y))), 4, (30, 240, 20), -1)
+        cv2.rectangle(vis, (int(x0*W), int(y0*H)), (int(x1*W), int(y1*H)), (0, 200, 255), 2)
+        (d/"qa").mkdir(exist_ok=True)
+        cv2.imwrite(str(d/"qa/ground-candidates.jpg"), vis)
+        return StepError(message+" Open qa/ground-candidates.jpg: green dots are usable landmarks, the orange box is "
+                         "the current region. Set ground.roi [x0, y0, x1, y1] (fractions) around dots on the flat floor only.")
+
     if len(cloud) < 30:
-        raise StepError(f"Only {len(cloud)} floor landmarks in the region. Adjust ground.roi in the shot settings.")
+        raise candidates(f"Only {len(cloud)} floor landmarks in the region (30 needed).")
     depth = np.median(np.linalg.norm(cloud-c[:3, 3], axis=1))
     tol = depth*.008
     rng = np.random.default_rng(926)
@@ -62,7 +81,7 @@ def main(cfg, work, args):
         if good.sum() > best.sum():
             best = good
     if best.sum() < 30 or best.mean() < .45:
-        raise StepError("No reliable floor plane in that region. Pick a flatter, textured floor area (ground.roi).")
+        raise candidates("No reliable floor plane in that region.")
     center = cloud[best].mean(0)
     n = np.linalg.svd(cloud[best]-center)[2][-1]
     if np.dot(c[:3, 3]-center, n) < 0:

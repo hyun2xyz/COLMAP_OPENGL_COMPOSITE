@@ -35,7 +35,7 @@
 
 중간 프레임에서 바닥 영역에 있는 3D 점들로 평면을 찾습니다. 영역은 기본 화면 아래쪽 / `topdown`이면 가운데 / `roi`를 주면 그 사각형입니다. 그다음 평면 법선을 Y축으로 두고, `anchor` 픽셀에서 쏜 광선이 평면에 닿는 곳을 원점으로 삼습니다. 스케일은 중간 카메라 높이가 1.6이 되도록 맞춥니다. 물체 크기는 `width_fraction`(화면 폭 대비 비율)으로 정합니다.
 
-**반드시 `qa/ground-fit.jpg`를 엽니다.** 초록 점이 실제 바닥 위에 있고, 빨간 십자가 물체를 세울 자리에 있어야 합니다. 벽이나 수풀에 점이 몰려 있으면 `roi`를 좁힙니다. 기둥이나 나무가 물체 앞을 지나가는 자리는 피하세요. 이 패키지는 가림 마스크를 만들지 않습니다.
+**반드시 `qa/ground-fit.jpg`를 엽니다.** 초록 점이 실제 바닥 위에 있고, 빨간 십자가 물체를 세울 자리에 있어야 합니다. 벽이나 수풀에 점이 몰려 있으면 `roi`를 좁힙니다. 칠한 바닥처럼 무늬가 적으면 기본 영역에 점이 모자라 멈춥니다. 그때 생기는 `qa/ground-candidates.jpg`에서 바닥 위의 초록 점(선·화살표·주차선 등)을 감싸도록 `roi`를 정합니다. 기둥이나 나무가 물체 앞을 지나가는 자리는 피하세요. 이 패키지는 가림 마스크를 만들지 않습니다.
 
 ## 6. simulate · render · qa-video (약 20초)
 
@@ -67,7 +67,7 @@
    - `source`: 페이지, 제작자, 다운로드 URL. `sha256`은 처음 받은 뒤 `fetch`가 알려 주는 값을 적습니다. 비워 두면 대조하지 않습니다.
    - `plate.start`·`plate.duration`
    - `camera.focal_px`: 모르면 850부터 시작합니다.
-   - `ground`: 처음에는 그대로 두고, `ground-fit.jpg`를 본 뒤 고칩니다.
+   - `ground`: 처음에는 그대로 두고, `ground-fit.jpg`를 본 뒤 고칩니다. 내려다보는 숏을 복사했다면 `topdown`을 지웁니다. 카메라가 앞으로 나아가는 숏은 중간 프레임 기준으로 물체를 놓기 때문에, 기준점(`anchor`)을 화면 위쪽(먼 곳)에 두어야 끝 프레임까지 화면 안에 남습니다.
    - `kind`: `water`, `rigid_spheres`, `cloth` 중 하나.
 4. `composite`를 실행하고 4번(카메라)과 5번(바닥)의 검사를 반드시 봅니다.
 
@@ -77,6 +77,7 @@
 | --- | --- | --- |
 | `Only n/33 keyframes registered` | 영상에 하드컷이나 흐림이 있는지 | 구간을 줄이거나 다른 구간 사용 |
 | qa-camera p95가 2px 이상 | `qa/acceptance-camera.json`의 `coverage`, 프레임별 관측 수 | `focal_px` 비교, 움직이는 물체(물·나무·사람)가 많은 구간 피하기 |
+| `Only n floor landmarks in the region` | `qa/ground-candidates.jpg` | 바닥 위 초록 점을 감싸도록 `roi` 지정 |
 | 물체가 바닥에서 미끄러짐 | `ground-fit.jpg` | `roi`를 실제 평평한 바닥으로 좁히기 |
 | 물체가 너무 크거나 작음 | `layout.json`의 `water_scale` | `width_fraction` |
 | OpenGL 오류 | `setup_environment.py --check`의 `opengl` | 그래픽 드라이버. Linux 서버라면 `VFX_GL_BACKEND=egl` |
