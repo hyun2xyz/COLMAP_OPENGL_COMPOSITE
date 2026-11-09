@@ -15,8 +15,10 @@ global agent rules or skills.
 - Name the render path exactly: ModernGL native OpenGL (3.3+, macOS 4.1 Metal).
   Three.js runs in Node only for water surface meshes and the Drift props. Do not
   call it browser WebGL.
-- Focal length, zero distortion, scale (camera height 1.6), sun direction and HDRI
-  lighting are assumptions. Report them as assumptions, never as measurements.
+- Focal length, zero distortion, scale (camera height 1.6), the cloth sun, the HDRI
+  and `relight.clipped_gain` are assumptions. `light` measures light directions,
+  colours and the floor from the plate, but only what the camera saw. Say which is
+  which.
 - Numerical QA is not visual QA. Before calling a shot done, look at the review
   sheets/stills and play the whole movie, or say it was not played.
 - New footage and HDRI: find them yourself under `docs/materials.md` (licence

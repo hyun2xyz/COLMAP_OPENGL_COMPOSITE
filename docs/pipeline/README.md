@@ -10,7 +10,7 @@
 
 | 예제 | 카메라 | 월드 정렬 | 물리 | 렌더 · 합성 |
 | --- | --- | --- | --- | --- |
-| [실내 물 · 정원 공 · 채석장 천](../workflow.md) (`shots/`, `python -m pipeline`) | pycolmap 고정 초점 키프레임 + 20% 유보 검증 + 프레임별 LK/PnP | 바닥 RANSAC 평면, Y-up, 기준 픽셀 광선으로 원점, 카메라 높이 1.6 | SPH 370입자 / 강체 구 7개 / PBD 천 825정점 | ModernGL 네이티브 OpenGL. Python에서 합성 + AE용 Straight 알파 |
+| [실내 물 · 정원 공 · 채석장 천 · 주차장 공](../workflow.md) (`shots/`, `python -m pipeline`) | pycolmap 고정 초점 키프레임 + 20% 유보 검증 + 프레임별 LK/PnP | 바닥 RANSAC 평면, Y-up, 기준 픽셀 광선으로 원점, 카메라 높이 1.6 | SPH 370입자 / 강체 구 7개 / PBD 천 825정점 | ModernGL 네이티브 OpenGL. Python에서 합성 + AE용 Straight 알파. 천·주차장 공은 조명 통합(`relight`) |
 | [Drift](../drift.md) (저장소 루트) | COLMAP, 리타임 숏은 OpenCV LK/PnP로 재보정 | COLMAP 희소 재구성 좌표계에 근·원경 궤적 배치 | Node.js SPH 입자 370개 | 물은 ModernGL 네이티브 OpenGL, 소품은 Three.js GLB. AE `ae/Build_Drift.jsx`로 AEP 생성 |
 | [백보드 물](../../examples/backboard_water/README.md) | 유리 백보드 네 모서리 PnP | 백보드 평면 기준(가로 1.8 가정) | 물방울 부착·합류·흐름 모델 | ModernGL GLSL, Straight 알파를 AE에서 플레이트 위에 |
 
@@ -66,6 +66,7 @@
 - 물은 앞·뒷면 굴절과 HDRI 반사를 씁니다. HDRI는 현장 조명을 측정한 것이 아니라 비슷한 빛을 고른 CC0 자료입니다.
 - 1.5배 SSAA를 premultiplied 상태로 축소합니다. 가장자리에 검거나 밝은 테두리가 생기지 않습니다.
 - 천 숏은 `relight`로 추정한 해 방향의 직사광, 하늘광, 실제 형상의 그림자 맵, 0.45px 블러, 그레인을 더합니다.
+- 공 숏은 `light`가 플레이트에서 빛 방향·색·비율과 바닥색·그레인을 재고 HDRI를 그 방향으로 돌립니다. `relight`는 그 빛으로 확산광·하이라이트·HDRI 반사·바닥 반사광, 부드러운 그림자와 접촉 그림자, 회전하는 표면 질감, 그레인을 넣습니다([워크플로 7절](../workflow.md#7-light--relight--조명-통합)).
 
 ## 7. 가림
 
@@ -81,7 +82,7 @@
 
 | 예제 | 합성본 | AE용 알파 |
 | --- | --- | --- |
-| 실내 물 · 정원 공 · 채석장 천 | `render/final/Composite.mp4` (천은 `relight/final/Composite.mp4`) | `Alpha.mov` (ProRes 4444 Straight) |
+| 실내 물 · 정원 공 · 채석장 천 · 주차장 공 | `render/final/Composite.mp4` (천·주차장 공은 `relight/final/Composite.mp4`) | `Alpha.mov` (ProRes 4444 Straight. 주차장 공은 그림자도 검은색 + 알파로 포함) |
 | Drift | AEP의 01 DRIFT | 03 ALPHA를 RGB + Alpha로 렌더, 물 패스 `Water/Water_Refraction.mov` |
 | 백보드 물 | `Composite.mp4` | `Alpha.mov` |
 
@@ -116,3 +117,6 @@
 | 슬로모션 숏에서 근경이 미끄러짐 | 원래 숏 카메라를 시간 보간 | 리타임 영상 특징점에 다시 맞춤(Drift 8.72px → 2.39px) |
 | CI에서 Windows·Linux만 물 굽기 해시 불일치 | CPU 종류(x64/arm64)별 부동소수점 차이 | CPU 종류별로 기록한 해시와 비교 |
 | 같은 입력인데 카메라 수치가 실행마다 조금 다름 | pycolmap 멀티스레드 | 정확한 값이 아니라 통과 기준으로 비교 |
+| 칠한 바닥에서 바닥 맞추기가 멈춤 | 기본 영역에 특징점이 14개뿐 | `qa/ground-candidates.jpg`를 보고 `roi` 지정 |
+| 빛 방향이 엉뚱함(먼 곳을 가리킴) | 천장 조명과 트인 면을 한 방향으로 평균, 카메라 자리에서 측정 | 밝은 곳을 3D에 놓고 물체 자리에서 측정, 두 무리로 나눔 |
+| 공 가운데에 가로 경계선 | 위(HDRI)와 아래(바닥색) 빛을 급하게 바꿈 | 코사인 가중으로 섞고, 반사 경계는 거칠기만큼 흐림 |

@@ -41,7 +41,12 @@ Commands and what to check after each are in [workflow](../../../docs/workflow.m
 - `simulate`, `render`, `qa-video`: then open the `review_*.jpg` sheets and play
   `Composite.mp4` start to end. Check drift, sliding, jitter, wrong occlusion,
   black or missing frames. Only then call the shot done.
-- Cloth shots: `relight` (estimated sun; record it as estimated).
+- Light integration (`relight`, then `qa-video --render <shot>/relight/final`):
+  cloth uses an estimated sun (record it as estimated). Sphere shots first run
+  `light`: open `qa/light-estimate.jpg` and confirm the arrows point at the real
+  lamps/windows before relighting. Say which values are measured (directions,
+  colours, floor, grain) and which are assumed (`clipped_gain`, light radius).
+  A top-down plate cannot measure light; keep its `render` result.
 
 The lesson ends at a reviewed composite.
 
@@ -51,8 +56,10 @@ The lesson ends at a reviewed composite.
   surface meshes in Node.
 - Focal length, zero distortion, scale (camera height 1.6), lighting, sun
   direction and simulation constants are assumptions; say so.
-- Lighting comes from a separate CC0 HDRI, not from the plate. Do not claim
-  first-frame HDRI extraction or measured light.
+- Reflections come from a separate CC0 HDRI, turned and scaled to the plate's
+  light; it is not captured on set. `light` measures only directions the camera
+  saw, and clipped lamps make their strength an assumption. Never claim a full
+  measured light probe.
 - Automatic checks, still review and full playback are three different claims.
 
 ## Long calculations

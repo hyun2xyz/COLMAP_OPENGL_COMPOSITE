@@ -9,7 +9,9 @@ Steps, in order (each one reads the previous step's files in work/<shot>/):
   simulate    water SPH / rigid spheres / cloth (CPU)
   render      native OpenGL composite -> Composite.mp4 + Alpha.mov
   qa-video    decode everything, numerical checks, review sheets
-  relight     (cloth) sun + sky + soft shadows + blur/grain integration
+  light       measure where the light comes from in the plate; turn and scale the HDRI to match
+  relight     light integration: cloth (estimated sun) or spheres (measured light, HDRI reflections,
+              soft + contact shadows, texture, grain)
   status      what is done for a shot and the next command
   composite   fetch -> prepare -> solve -> qa-camera -> ground -> simulate -> render -> qa-video
 """
@@ -24,7 +26,8 @@ from .common import StepError, shot_config, work_root
 
 STEPS = {
     "fetch": "fetch", "prepare": "prepare", "solve": "solve", "qa-camera": "qa_camera", "ground": "ground",
-    "simulate": "simulate", "render": "render", "qa-video": "qa_video", "relight": "relight", "status": "status",
+    "simulate": "simulate", "render": "render", "qa-video": "qa_video", "light": "light", "relight": "relight",
+    "status": "status",
 }
 COMPOSITE = ["fetch", "prepare", "solve", "qa-camera", "ground", "simulate", "render", "qa-video"]
 

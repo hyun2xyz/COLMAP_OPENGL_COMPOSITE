@@ -7,7 +7,7 @@ FILES = {
     "source/original.mp4": "fetch", "frames": "prepare", "Camera_Three.json": "solve",
     "qa/acceptance-camera.json": "qa-camera", "layout.json": "ground", "sim/simulation-qa.json": "simulate",
     "render/final/Composite.mp4": "render", "render/final/video-qa.json": "qa-video",
-    "relight/final/Composite.mp4": "relight",
+    "light.json": "light", "relight/final/Composite.mp4": "relight",
 }
 
 

@@ -110,8 +110,11 @@ def posts(pins, L):
 
 def main(cfg, work, args):
     import moderngl as gl
+    if cfg["kind"] == "rigid_spheres":
+        from .relight_spheres import main as spheres
+        return spheres(cfg, work, args)
     if cfg["kind"] != "cloth" or "relight" not in cfg:
-        raise StepError("relight is the cloth integration pass; this shot has no 'relight' settings.")
+        raise StepError("relight supports cloth shots (with 'relight' settings) and rigid-sphere shots.")
     d = shot_dir(cfg, work)
     rl = cfg["relight"]
     sun = np.array(rl["sun"], float)

@@ -96,5 +96,32 @@ class Materials(unittest.TestCase):
                 self.assertTrue(terms["license"] and terms["license_url"].startswith("https://") and terms["permissions"])
 
 
+class Lighting(unittest.TestCase):
+    def test_hdri_solid_angles_cover_the_sphere(self):
+        from pipeline.light import hdri_directions
+        dirs, omega = hdri_directions(64, 128)
+        self.assertAlmostEqual(float(omega.sum()), 4*np.pi, places=2)
+        np.testing.assert_allclose(np.linalg.norm(dirs, axis=-1), 1, atol=1e-9)
+
+    def test_two_groups_separates_two_lamps(self):
+        from pipeline.light import two_groups
+        rng = np.random.default_rng(1)
+        a = np.array([0, .8, .6])+rng.normal(0, .02, (50, 3))
+        b = np.array([.9, .2, -.4])+rng.normal(0, .02, (20, 3))
+        dirs = np.concatenate([a, b])
+        dirs /= np.linalg.norm(dirs, axis=1, keepdims=True)
+        groups = two_groups(dirs, np.ones(len(dirs)))
+        self.assertEqual([int(g[2].sum()) for g in groups], [50, 20])
+        self.assertGreater(float(groups[0][1]@np.array([0, .8, .6])), .99)
+
+    def test_sphere_rotations_stay_orthonormal(self):
+        from pipeline.relight_spheres import rotations
+        t = np.linspace(0, 1, 40)[:, None, None]
+        positions = np.concatenate([np.stack([t[:, 0]*3, .3+0*t[:, 0], t[:, 0]], -1)]*2, axis=1)
+        rots = rotations(positions, np.array([.2, .3]), seed=3)
+        for r in rots.reshape(-1, 3, 3):
+            np.testing.assert_allclose(r@r.T, np.eye(3), atol=1e-9)
+
+
 if __name__ == "__main__":
     unittest.main()

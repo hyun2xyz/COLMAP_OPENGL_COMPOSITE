@@ -9,9 +9,11 @@ C4D나 Blender 없이 **코드만으로** 실사 영상에 CG를 합성하는 �
 
 Mac·Windows·Linux에서 Codex나 Claude Code와 함께 씁니다. 처음이라면 **[START-HERE](START-HERE.md)**부터 보세요.
 
-| 실내 물 · `hall_water` | 정원 공 · `courtyard_spheres` | 채석장 천 · `quarry_cloth` |
-| --- | --- | --- |
-| ![폐건물 실내 드론 영상에 떠 있는 물과 금색 링](docs/pipeline/hall-water.webp) | ![정원 잔디 위에서 튀는 색색의 공 일곱 개](docs/pipeline/courtyard-spheres.webp) | ![채석장 초지의 네 기둥 사이에서 바람에 흔들리는 주황색 천](docs/pipeline/quarry-cloth.webp) |
+| 실내 물 · `hall_water` | 정원 공 · `courtyard_spheres` |
+| --- | --- |
+| ![폐건물 실내 드론 영상에 떠 있는 물과 금색 링](docs/pipeline/hall-water.webp) | ![정원 잔디 위에서 튀는 색색의 공 일곱 개](docs/pipeline/courtyard-spheres.webp) |
+| **채석장 천 · `quarry_cloth`** | **주차장 공 · `garage_spheres`** |
+| ![채석장 초지의 네 기둥 사이에서 바람에 흔들리는 주황색 천](docs/pipeline/quarry-cloth.webp) | ![다층 주차장 초록 차로 위 금색 링과 공 일곱 개. 천장 조명과 초록 바닥 반사가 들어가 있다](docs/pipeline/garage-spheres.webp) |
 
 ## 명령 한 줄씩
 
@@ -23,6 +25,11 @@ python -m pipeline status hall_water           # 어디까지 했는지, 다음 
 
 python -m pipeline composite quarry_cloth
 python -m pipeline relight quarry_cloth        # 해 방향·하늘광·그림자·블러·그레인
+
+python -m pipeline composite garage_spheres
+python -m pipeline light garage_spheres        # 플레이트에서 빛이 오는 방향 측정, HDRI 방향 맞추기
+python -m pipeline relight garage_spheres      # 측정한 빛·HDRI 반사·그림자·질감·그레인
+python -m pipeline qa-video garage_spheres --render work/garage_spheres/relight/final
 
 python scripts/find_materials.py footage "drone abandoned hall"   # 쓸 수 있는 영상 찾기
 python scripts/find_materials.py hdri "forest"                    # CC0 HDRI 찾기
@@ -42,7 +49,8 @@ python scripts/find_materials.py hdri "forest"                    # CC0 HDRI 찾
 | `simulate` | 물(SPH 370입자 → MarchingCubes), 강체 구 7개, PBD 천 825정점 | `sim/` | 유한값, 겹침·변형률 한도 |
 | `render` | ModernGL 네이티브 OpenGL. 굴절·HDRI 반사·그림자, 1.5배 SSAA | `Composite.mp4`, `Alpha.mov` | — |
 | `qa-video` | 전체 디코드, 누락·중복·배경 훼손 검사, 검수 시트 | `video-qa.json`, `review_*.jpg` | 배경 MAE < 4 (**+ 사람이 전체 재생 확인**) |
-| `relight` | (천) 추정 태양광·하늘광, 실제 형상의 그림자 맵, 0.45px 블러, 그레인 | `relight/final/` | — |
+| `light` | 플레이트의 밝은 곳(조명·창·트인 면)을 복원한 3D 위치로 옮겨 물체에서 본 빛 방향·세기·색을 측정하고, HDRI를 같은 방향으로 돌리고 밝기를 맞춤 | `light.json`, `qa/light-estimate.jpg`, `qa/light-probe.jpg` | 화살표가 실제 조명 쪽을 가리키는지 눈으로 확인 |
+| `relight` | 천: 추정 태양광·하늘광·그림자 맵·블러·그레인. 공: 측정한 빛, 돌린 HDRI 반사, 실제 바닥색 반사광, 부드러운 그림자 + 접촉 그림자, 회전하는 표면 질감, 플레이트에서 잰 그레인 | `relight/final/` | `qa-video --render`로 검사 |
 
 단계별 설명, 새 영상으로 바꾸는 법, 실패했을 때 고칠 곳은 **[워크플로](docs/workflow.md)**에 있습니다.
 
@@ -61,7 +69,7 @@ PnP 오차가 작다는 것은 **맞춘 그 점들**에 잘 겹친다는 뜻일 
 
 - **초점거리는 가정값입니다.** `fx=fy=850, cx=640, cy=360`(1280×720 기준)이고 렌즈 왜곡은 0으로 둡니다. 자유 초점 복원이 회전 위주의 드론 숏에서 발산해서 고정했습니다. 새 영상에서는 `camera.focal_px`를 바꿔 가며 검수 수치를 비교합니다.
 - **스케일은 실측이 아닙니다.** 중간 프레임의 카메라 높이를 1.6으로 정규화했을 뿐입니다. 중력·바람·재질도 연출값입니다.
-- **조명은 촬영 현장을 복원한 것이 아닙니다.** 별도의 CC0 HDRI를 쓰고, 해 방향은 그림자를 보고 눈으로 추정했습니다.
+- **조명은 촬영 현장을 완전히 복원한 것이 아닙니다.** 반사는 별도의 CC0 HDRI입니다. 공 숏은 `light`가 플레이트에서 빛 방향·색·비율을 재지만, 카메라가 본 방향만 잴 수 있고 하얗게 날아간 조명의 실제 밝기는 가정값(`relight.clipped_gain`)입니다. 천 숏의 해 방향은 그림자를 보고 눈으로 추정했습니다.
 - 좌표 변환은 이렇습니다. COLMAP 광학 좌표(+Y 아래, +Z 앞)에 `diag(1,-1,-1)`을 곱해 Three/OpenGL 좌표(Y 위, −Z 시선)로 바꾸고, `matrixWorld`는 column-major입니다. 투영 행렬은 K(fx, fy, cx, cy)로 직접 만들고, OpenCV 관측값에서는 0.5px를 뺍니다. 이 왕복은 `tests/`에서 검사합니다.
 - 렌더 경로는 **ModernGL → 네이티브 OpenGL 3.3 이상**(Mac에서는 4.1 Metal)입니다. 브라우저 WebGL이 아닙니다. Three.js는 Node에서 물 표면 메시를 만드는 데만 씁니다.
 

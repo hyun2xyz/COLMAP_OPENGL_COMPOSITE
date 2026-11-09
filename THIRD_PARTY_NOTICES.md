@@ -17,6 +17,7 @@
 | `hall_water` | [Drone Video of the Interior of an Abandoned Building](https://www.pexels.com/video/drone-video-of-the-interior-of-an-abandoned-building-13939575/) | Florian Delée | [Pexels License](https://www.pexels.com/license/) |
 | `courtyard_spheres` | [Drone Footage of a Courtyard](https://www.pexels.com/video/drone-footage-of-a-courtyard-9125189/) | Be The Observer | Pexels License |
 | `quarry_cloth` | [Aerial View of Green and Rocky Quarry Landscape](https://www.pexels.com/video/aerial-view-of-green-and-rocky-quarry-landscape-33990833/) | David Pickup | Pexels License |
+| `garage_spheres` | [A Push-in Shot in a Multi Level Carpark](https://www.pexels.com/video/a-push-in-shot-in-a-multi-level-carpark-4059360/) | Steve B | Pexels License |
 
 Pexels License는 무료 다운로드·사용·수정을 허용하고, 출처 표기는 선택입니다. 다만 CC0는 아닙니다. 수정하지 않은 원본을 판매하거나 스톡 플랫폼에 재배포하는 것, 제작자나 배포처의 보증·후원을 암시하는 것은 금지됩니다. 그래서 원본 영상은 저장소에 넣지 않습니다. `docs/pipeline/*.webp`는 합성 결과의 스틸입니다.
 
@@ -24,6 +25,7 @@ HDRI는 Poly Haven의 [CC0](https://polyhaven.com/license) 자료입니다(Power
 
 - [Abandoned Factory Canteen 01](https://polyhaven.com/a/abandoned_factory_canteen_01) — Sergej Majboroda
 - [Autumn Forest 02](https://polyhaven.com/a/autumn_forest_02) — Andreas Mischok
+- [Parking Garage](https://polyhaven.com/a/parking_garage) — Greg Zaal, Rico Cilliers
 
 ## 라이브러리와 도구
 
