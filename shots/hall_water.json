@@ -1,0 +1,34 @@
+{
+  "title": "실내 물 · 폐건물 드론 (SPH 물 + 금색 링)",
+  "kind": "water",
+  "source": {
+    "title": "Drone Video of the Interior of an Abandoned Building",
+    "creator": "Florian Delée",
+    "page": "https://www.pexels.com/video/drone-video-of-the-interior-of-an-abandoned-building-13939575/",
+    "license": "Pexels License",
+    "license_url": "https://www.pexels.com/license/",
+    "permissions": "Free download, use and modification; attribution optional. Not CC0. No resale of unaltered footage, no stock-platform redistribution, no implied endorsement.",
+    "download": "https://videos.pexels.com/video-files/13939575/13939575-uhd_3840_2160_30fps.mp4",
+    "sha256": "c492a8a3a1b24032ad9b545275adb1efc9cfddc9d308265dbb0b4785ed6075b2",
+    "checked": "2026-11-06"
+  },
+  "hdri": {
+    "file": "abandoned_factory_canteen_01_1k.hdr",
+    "title": "Abandoned Factory Canteen 01",
+    "author": "Sergej Majboroda",
+    "page": "https://polyhaven.com/a/abandoned_factory_canteen_01",
+    "license": "CC0",
+    "credit": "Powered by Poly Haven",
+    "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/abandoned_factory_canteen_01_1k.hdr",
+    "sha256": "73a29dbe6fe6e4e2ec26a430fa9e9f4b39c8b72a0990e9330381d20f68479f4c"
+  },
+  "plate": {"start": 0, "duration": 4, "size": [1280, 720], "fps": 24, "keyframe_stride": 3},
+  "camera": {"focal_px": 850, "note": "Assumed fixed pinhole focal at 1280 px width; free self-calibration diverged on this shot."},
+  "ground": {
+    "anchor": [0.46, 0.67],
+    "width_fraction": 0.21,
+    "occlusion": "Open floor in front of the graffiti half-wall; columns stay outside the water silhouette.",
+    "shadow": "Ring shadow from the actual torus mesh under an assumed left-window area light."
+  },
+  "render": {"shadow": "ring", "key_light": [-2.0, 1.0, 0.65]}
+}

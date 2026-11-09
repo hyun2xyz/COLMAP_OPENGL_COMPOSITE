@@ -1,0 +1,39 @@
+# Local capture, environments, renders and native projects
+Footage/
+Lighting/
+Models/
+water-cache/
+.scratch/
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+*.aep
+*.aepx
+*.mov
+*.mp4
+*.mkv
+*.hdr
+*.exr
+*.zip
+*.log
+.env
+.env.*
+Water/water-particles.bin
+scene/layout.json
+scene/camera_ae.json
+scene/stabilize.json
+.DS_Store
+Thumbs.db
+*.aep Logs/
+
+# Reproducible examples: user inputs and generated media stay local
+inputs/
+local-runs/
+examples/**/heights/
+examples/**/lookdev/
+
+# Composite pipeline: all footage, frames, solves and renders live in /work/ (or VFX_WORK)
+/work/
+tools.local.json
+*.part

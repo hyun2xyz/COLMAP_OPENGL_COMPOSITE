@@ -1,0 +1,43 @@
+{
+  "title": "채석장 천 · 항공 (PBD 천 + 네 기둥)",
+  "kind": "cloth",
+  "source": {
+    "title": "Aerial View of Green and Rocky Quarry Landscape",
+    "creator": "David Pickup | Advertising & Marketing",
+    "page": "https://www.pexels.com/video/aerial-view-of-green-and-rocky-quarry-landscape-33990833/",
+    "license": "Pexels License",
+    "license_url": "https://www.pexels.com/license/",
+    "permissions": "Free download, use and modification; attribution optional. Not CC0. No resale of unaltered footage, no stock-platform redistribution, no implied endorsement.",
+    "download": "https://videos.pexels.com/video-files/33990833/14419522_3840_2160_60fps.mp4",
+    "sha256": "1a840c65f3b15f582deb008273259c0e0759f1093cee45e81c299664016f93ee",
+    "checked": "2026-11-06"
+  },
+  "hdri": {
+    "file": "autumn_forest_02_1k.hdr",
+    "title": "Autumn Forest 02",
+    "author": "Andreas Mischok",
+    "page": "https://polyhaven.com/a/autumn_forest_02",
+    "license": "CC0",
+    "credit": "Powered by Poly Haven",
+    "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/autumn_forest_02_1k.hdr",
+    "sha256": "dfe7b22843057984801d5fde702aafd2d2f63f4b09b5396b859e3ee97bca72f3"
+  },
+  "plate": {"start": 0, "duration": 4, "size": [1280, 720], "fps": 24, "keyframe_stride": 3},
+  "camera": {"focal_px": 850, "note": "Assumed fixed pinhole focal at 1280 px width."},
+  "ground": {
+    "anchor": [0.37, 0.52],
+    "width_fraction": 0.12,
+    "roi": [0.25, 0.4, 0.44, 0.75],
+    "occlusion": "Clear grass in front of the quarry vegetation; cloth self-occlusion uses the depth buffer.",
+    "shadow": "Shadow map of the actual cloth and posts along one estimated sun direction."
+  },
+  "render": {"shadow": "analytic"},
+  "relight": {
+    "sun": [-0.5895357212460445, 0.6156614753256583, -0.5228848641668068],
+    "sun_note": "Upper-left light and lower-right vegetation shadows in plate frame 48; estimated by eye, not measured.",
+    "blur_sigma": 0.45,
+    "grain_luma": 0.8,
+    "grain_chroma": 0.18,
+    "seed": 20261106
+  }
+}

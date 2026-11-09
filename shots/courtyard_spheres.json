@@ -1,0 +1,35 @@
+{
+  "title": "정원 공 · 수직 하강 드론 (강체 구 7개)",
+  "kind": "rigid_spheres",
+  "source": {
+    "title": "Drone Footage of a Courtyard",
+    "creator": "Be The Observer",
+    "page": "https://www.pexels.com/video/drone-footage-of-a-courtyard-9125189/",
+    "license": "Pexels License",
+    "license_url": "https://www.pexels.com/license/",
+    "permissions": "Free download, use and modification; attribution optional. Not CC0. No resale of unaltered footage, no stock-platform redistribution, no implied endorsement.",
+    "download": "https://videos.pexels.com/video-files/9125189/9125189-uhd_3840_2160_24fps.mp4",
+    "sha256": "3c766fd9a76cc340139f1a7a68ca7b376981d460e536d5a1d97225d5b979f9b6",
+    "checked": "2026-11-06"
+  },
+  "hdri": {
+    "file": "autumn_forest_02_1k.hdr",
+    "title": "Autumn Forest 02",
+    "author": "Andreas Mischok",
+    "page": "https://polyhaven.com/a/autumn_forest_02",
+    "license": "CC0",
+    "credit": "Powered by Poly Haven",
+    "download": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/autumn_forest_02_1k.hdr",
+    "sha256": "dfe7b22843057984801d5fde702aafd2d2f63f4b09b5396b859e3ee97bca72f3"
+  },
+  "plate": {"start": 0, "duration": 4, "size": [1280, 720], "fps": 24, "keyframe_stride": 3},
+  "camera": {"focal_px": 850, "note": "Assumed fixed pinhole focal at 1280 px width."},
+  "ground": {
+    "topdown": true,
+    "anchor": [0.5, 0.5],
+    "width_fraction": 0.25,
+    "occlusion": "Clear central lawn, no tree crowns between camera and spheres.",
+    "shadow": "Height-dependent soft shadows projected onto the fitted lawn plane."
+  },
+  "render": {"shadow": "analytic"}
+}
