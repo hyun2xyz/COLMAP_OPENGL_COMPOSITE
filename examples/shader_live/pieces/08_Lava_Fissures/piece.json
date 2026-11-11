@@ -1,0 +1,36 @@
+{
+ "name": "08_Lava_Fissures",
+ "pexels": 34696869,
+ "source": "../../footage/Pexels_34696869.mp4",
+ "start": 0,
+ "frames": 210,
+ "step": 1,
+ "hfov": 73.7,
+ "refine_focal": false,
+ "plane": {
+  "frame": 0,
+  "roi": [
+   0,
+   0,
+   1920,
+   1080
+  ],
+  "anchor": [
+   900,
+   800
+  ],
+  "xdir": [
+   1400,
+   800
+  ],
+  "cam_h": 27.0,
+  "grid": 2.0,
+  "grid_n": 20
+ },
+ "sun": {
+  "az": 200,
+  "el": 55
+ },
+ "solver": "homography",
+ "tilt": 0.0
+}

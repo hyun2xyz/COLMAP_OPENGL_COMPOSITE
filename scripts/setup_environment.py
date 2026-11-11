@@ -3,6 +3,8 @@
 --check      read/probe only: Python, .venv packages, ffmpeg/ffprobe/node/npm, Source/node_modules, OpenGL 3.3
 --configure  write the verified absolute tool paths to tools.local.json (no PATH change)
 --install    create/reuse this folder's .venv, pip install requirements.txt, npm ci --prefix Source
+             add "--with body" for the optional body-tracking packages (examples/fruit_physics)
+The check also lists, under "examples", what each example outside `python -m pipeline` still needs.
 It never installs OS applications, edits system PATH or creates schedulers.
 """
 from __future__ import annotations
@@ -21,7 +23,17 @@ import venv
 ROOT = Path(__file__).resolve().parents[1]
 TOOLS = ("ffmpeg", "ffprobe", "node", "npm")
 SUPPORTED_PYTHON = {(3, 12), (3, 13)}
-PACKAGES = ("numpy", "opencv-python-headless", "scipy", "pycolmap", "moderngl")
+PACKAGES = ("numpy", "opencv-python-headless", "scipy", "pycolmap", "moderngl", "pillow")
+# Optional package groups: --install --with <group>
+EXTRAS = {"body": ("requirements-body.txt", ("mediapipe", "mujoco"))}
+# Examples outside the pipeline. Their inputs are not in git; scripts/fetch_assets.py downloads them.
+KITCHEN_CLIP = "examples/kitchen_glitch/source/Pexels_7525471_720x1280.mp4"
+EXAMPLES = {
+    "backboard_water": {},
+    "shader_live": {"files": ("examples/shader_live/footage/Pexels_10708812.mp4",)},
+    "kitchen_glitch": {"files": (KITCHEN_CLIP,), "tools": ("bash",)},
+    "fruit_physics": {"extras": ("body",), "files": (KITCHEN_CLIP, "examples/fruit_physics/models/pose_landmarker_heavy.task")},
+}
 
 
 def settings():
@@ -82,16 +94,21 @@ def venv_python():
     return ROOT/".venv"/("Scripts/python.exe" if os.name == "nt" else "bin/python")
 
 
+def package_versions(python, names):
+    """Python version and the installed version (or None) of each distribution in that interpreter."""
+    code = ("import importlib.metadata as m,json,sys\np={}\nfor n in %r:\n try:p[n]=m.version(n)\n"
+            " except m.PackageNotFoundError:p[n]=None\nprint(json.dumps(dict(version=list(sys.version_info[:3]),packages=p)))") % (tuple(names),)
+    return json.loads(subprocess.run([str(python), "-I", "-B", "-c", code], check=True, capture_output=True,
+                                     encoding="utf-8", timeout=30).stdout)
+
+
 def venv_state():
     python = venv_python()
     state = {"python": str(python), "ready": False}
     if not python.is_file():
         return {**state, "error": "Project .venv missing; run --install"}
-    code = ("import importlib.metadata as m,json,sys\np={}\nfor n in %r:\n try:p[n]=m.version(n)\n"
-            " except m.PackageNotFoundError:p[n]=None\nprint(json.dumps(dict(version=list(sys.version_info[:3]),packages=p)))") % (PACKAGES,)
     try:
-        data = json.loads(subprocess.run([str(python), "-I", "-B", "-c", code], check=True, capture_output=True,
-                                         encoding="utf-8", timeout=30).stdout)
+        data = package_versions(python, PACKAGES)
     except (OSError, ValueError, subprocess.SubprocessError) as exc:
         return {**state, "error": str(exc)}
     missing = [n for n, v in data["packages"].items() if not v]
@@ -116,15 +133,36 @@ def opengl_state():
     return {"ready": True, **json.loads(result.stdout)}
 
 
+def examples_state(core_ready):
+    """What each example outside the pipeline still needs. Does not change the top-level "ready"."""
+    python, extras = venv_python(), {}
+    for name, (_, names) in EXTRAS.items():
+        try:
+            versions = package_versions(python, names)["packages"] if python.is_file() else dict.fromkeys(names)
+        except (OSError, ValueError, subprocess.SubprocessError):
+            versions = dict.fromkeys(names)
+        extras[name] = {"ready": all(versions.values()), "packages": versions}
+    examples = {}
+    for name, need in EXAMPLES.items():
+        missing = [] if core_ready else ["core setup: --install, then --check must say ready"]
+        missing += [f"packages: --install --with {e}" for e in need.get("extras", ()) if not extras[e]["ready"]]
+        missing += [f"input: {f} (python scripts/fetch_assets.py list)" for f in need.get("files", ()) if not (ROOT/f).exists()]
+        missing += [f"tool: {t} on PATH" for t in need.get("tools", ()) if not shutil.which(t)]
+        examples[name] = {"ready": not missing, "missing": missing}
+    return extras, examples
+
+
 def check(explicit=None):
     tools, env = find_tools(explicit), venv_state()
     node_modules = (ROOT/"Source/node_modules/three").is_dir()
     gl = opengl_state() if env["ready"] else {"ready": False, "error": "needs a ready .venv"}
+    ready = env["ready"] and node_modules and gl["ready"] and all("error" not in t for t in tools.values())
+    extras, examples = examples_state(ready)
     return {"schema": "colmap-opengl-composite.setup.v1", "root": str(ROOT), "os": platform.platform(),
             "python": {"path": sys.executable, "version": platform.python_version(),
                        "supported": sys.version_info[:2] in SUPPORTED_PYTHON},
             "venv": env, "tools": tools, "three_js": node_modules, "opengl": gl,
-            "ready": env["ready"] and node_modules and gl["ready"] and all("error" not in t for t in tools.values())}
+            "extras": extras, "examples": examples, "ready": ready}
 
 
 def configure(explicit=None):
@@ -139,7 +177,7 @@ def configure(explicit=None):
     return {"configured": True, "config": str(ROOT/"tools.local.json"), "tools": tools, "system_path_changed": False}
 
 
-def install():
+def install(extras=()):
     if not (ROOT/".venv").exists():
         if sys.version_info[:2] not in SUPPORTED_PYTHON:
             raise ValueError("Create the project environment with Python 3.13 (or 3.12)")
@@ -148,12 +186,16 @@ def install():
     env["PIP_CONFIG_FILE"] = os.devnull
     subprocess.run([str(venv_python()), "-I", "-m", "pip", "install", "--require-virtualenv", "-r",
                     str(ROOT/"requirements.txt")], check=True, env=env)
+    for name in extras:
+        subprocess.run([str(venv_python()), "-I", "-m", "pip", "install", "--require-virtualenv", "-r",
+                        str(ROOT/EXTRAS[name][0])], check=True, env=env)
     npm = find_tools().get("npm", {})
     if not npm.get("path"):
         raise ValueError("npm not found; install Node.js LTS first (docs/setup-*.md)")
     subprocess.run([npm["path"], "ci", "--prefix", str(ROOT/"Source"), "--no-audit", "--no-fund"], check=True,
                    shell=(os.name == "nt"))
-    return {"installed": True, "venv_python": str(venv_python()), "node_modules": str(ROOT/"Source/node_modules")}
+    return {"installed": True, "venv_python": str(venv_python()), "node_modules": str(ROOT/"Source/node_modules"),
+            "extras": list(extras)}
 
 
 def main(argv=None):
@@ -162,12 +204,14 @@ def main(argv=None):
     action.add_argument("--check", action="store_true")
     action.add_argument("--configure", action="store_true")
     action.add_argument("--install", action="store_true")
+    p.add_argument("--with", dest="extras", nargs="+", choices=sorted(EXTRAS), default=[],
+                   help="with --install: also install an optional package group")
     for name in TOOLS:
         p.add_argument("--"+name, help="actual executable path")
     args = p.parse_args(argv)
     explicit = {n: getattr(args, n) for n in TOOLS if getattr(args, n)}
     try:
-        result = install() if args.install else configure(explicit) if args.configure else check(explicit)
+        result = install(args.extras) if args.install else configure(explicit) if args.configure else check(explicit)
     except (ValueError, OSError, subprocess.SubprocessError) as exc:
         print(json.dumps({"error": str(exc)}, ensure_ascii=False), file=sys.stderr)
         return 1

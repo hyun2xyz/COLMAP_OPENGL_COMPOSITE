@@ -1,0 +1,5 @@
+# Optional: body tracking and physics (examples/fruit_physics)
+# Install with: python scripts/setup_environment.py --install --with body
+# Verified with Python 3.12 on Windows 11 (2026-11-11).
+mediapipe==1.2.2
+mujoco==4.0.0

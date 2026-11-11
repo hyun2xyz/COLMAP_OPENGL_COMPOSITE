@@ -24,7 +24,7 @@ jobs:
       - name: Unit tests (camera math, shot settings, CLI)
         run: python -B -m unittest discover -s tests -v
       - name: Every script compiles
-        run: python -m compileall -q pipeline scripts tracking
+        run: python -m compileall -q pipeline scripts tracking examples tools
       - name: three.js
         run: npm ci --prefix Source --no-audit --no-fund
       - name: SPH bake matches the record for this CPU architecture

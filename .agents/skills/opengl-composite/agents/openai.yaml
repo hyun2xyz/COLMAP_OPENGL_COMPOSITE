@@ -1,4 +1,4 @@
 interface:
   display_name: "OpenGL Composite"
-  short_description: "COLMAP·PnP 카메라 + 코드 시뮬레이션 + 네이티브 OpenGL 실사 합성"
+  short_description: "COLMAP·PnP 카메라 + 코드 시뮬레이션 + 네이티브 OpenGL 실사 합성, GLSL 월드 고정 효과와 몸 추적 물리 예제"
   default_prompt: "Use $opengl-composite to check my computer and guide one step at a time from finding a licensed clip to a reviewed OpenGL composite."

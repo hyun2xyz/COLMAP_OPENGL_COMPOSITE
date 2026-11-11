@@ -50,3 +50,15 @@ TASK_PYTHON="$("$TASK_BREW" --prefix python@3.13)/bin/python3.13"
 ```
 
 외장 SSD를 쓰려면 `--work /Volumes/드라이브/폴더`를 붙입니다. 이어지는 단계는 [워크플로](workflow.md), 긴 계산을 맡기는 법은 [background](background.md)에 있습니다.
+
+## 5. 다른 예제를 쓸 때
+
+`--check` 출력의 `examples` 항목이 예제마다 빠진 것을 알려 줍니다.
+
+| 예제 | 준비 |
+| --- | --- |
+| Shader Live | `.venv/bin/python scripts/fetch_assets.py footage 10708812` |
+| 무중력 과일 | `.venv/bin/python -B scripts/setup_environment.py --install --with body`, `scripts/fetch_assets.py footage 7525471`, `scripts/fetch_assets.py pose-model` |
+| 주방 글리치 | `scripts/fetch_assets.py footage 7525471`. 터미널에서 `bash run_glitch.sh`를 실행합니다. |
+
+이 예제들은 `ffmpeg`와 `ffprobe`를 PATH에서 찾습니다. Homebrew로 설치했다면 바로 잡힙니다. 이 예제들은 Windows에서만 확인했고 Mac에서는 실행해 보지 못했습니다.

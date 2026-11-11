@@ -1,0 +1,8 @@
+# Fruit ZeroG Physics, verified 2026-11-09 on Windows 11, Python 3.12, RTX 4070 Ti SUPER
+mediapipe==1.2.2
+mujoco==4.0.0
+moderngl==5.13.0
+opencv-python==5.0.0.93
+numpy==2.5.4
+scipy==1.18.1
+pillow==13.0.0

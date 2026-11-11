@@ -1,6 +1,6 @@
 ---
 name: opengl-composite
-description: Set up a macOS/Windows/Linux computer and guide a student, one step at a time, from finding a licensed live-action clip to a COLMAP/PnP camera, a CPU simulation (SPH water, rigid spheres, PBD cloth) rendered with native OpenGL, and numerical + visual QA. Use inside this repository only.
+description: Set up a macOS/Windows/Linux computer and guide a student, one step at a time, from finding a licensed live-action clip to a COLMAP/PnP camera, a CPU simulation (SPH water, rigid spheres, PBD cloth) rendered with native OpenGL, and numerical + visual QA. Also covers the examples outside the pipeline: world-locked GLSL effects (Shader Live), MediaPipe body tracking with MuJoCo physics, an FFmpeg-only glitch and backboard water. Use inside this repository only.
 ---
 
 # OpenGL composite
@@ -49,6 +49,36 @@ Commands and what to check after each are in [workflow](../../../docs/workflow.m
   A top-down plate cannot measure light; keep its `render` result.
 
 The lesson ends at a reviewed composite.
+
+## Examples outside the pipeline
+
+`python -m pipeline` covers the shots in `shots/`. Four more examples live in `examples/`, each with its own README
+and commands; read only the one in use. `scripts/setup_environment.py --check` lists what each still needs under
+`"examples"`. Inputs: `python scripts/fetch_assets.py list | footage <number> | pose-model`. These examples call
+`ffmpeg`/`ffprobe` from PATH and keep their outputs inside the example folder (ignored by git), not in `work/`.
+
+| Example | What it teaches | Check that it worked |
+| --- | --- | --- |
+| `backboard_water` | four-corner PnP, GLSL drops | `--demo --frames 12` writes `preview_006.png` with drops on a backboard |
+| `kitchen_glitch` | FFmpeg-only datamosh from a motion mask (needs `bash`; Git Bash on Windows) | `Kitchen_Datamosh_Glitch.mp4`; only the moving person breaks into blocks |
+| `shader_live` | camera and plane solve (COLMAP or plane homography), one world-locked GLSL fragment shader | `work/check_plane.jpg` grid stays on the surface in all three frames, then stills, then `finish.py` ends with `FINISHED_OK` |
+| `fruit_physics` | MediaPipe pose to invisible rigid bodies, MuJoCo zero gravity, OpenGL fruit (needs `--install --with body`) | `Fruit_ZeroG_Physics.mp4`; fruit bounce off the dancer and pass behind her |
+
+Rules that came from real failures:
+
+- A solve that registers every frame with a small error can still be wrong. Open `work/check_plane.jpg` before
+  rendering. If the grid slides or tilts, change the solver, not the shader: straight-down or flat shots use
+  `"solver": "homography"`; clouds, sun flare and water are kept out with `mask_roi`.
+- In GLSL edited through string replacement, a `//` comment in the middle of a line removes the rest of that line.
+  Use `/* */` unless the comment ends the line.
+- A passed still does not prove the full render. Check `work/finish.log` for `FINISHED_OK`, then read frames back
+  from the encoded mp4 (`verify_sheet.py`).
+- The Straight-alpha layers of `shader_live` are exact only over their own plate.
+
+Body tracking: MediaPipe first, SAM 3D Body only after approval. `fruit_physics` works with MediaPipe, which downloads
+freely. SAM 3D Body gives a full body mesh, but its weights are gated: the student must request access on Hugging
+Face and wait, and it needs PyTorch and a capable GPU. Give the student [docs/sam-3d-body.md](../../../docs/sam-3d-body.md),
+let them submit the form themselves, and continue with MediaPipe meanwhile. Never look for the weights elsewhere.
 
 ## Honesty rules
 

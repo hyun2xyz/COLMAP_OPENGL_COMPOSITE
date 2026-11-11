@@ -41,3 +41,15 @@ py -3.13 -B scripts/setup_environment.py --install
 ```
 
 이 패키지가 Windows에서 실제로 어디까지 확인되었는지는 [검증 범위](validation.md)에 있습니다. 이어지는 단계는 [워크플로](workflow.md)를 따릅니다.
+
+## 5. 다른 예제를 쓸 때
+
+`--check` 출력의 `examples` 항목이 예제마다 빠진 것을 알려 줍니다.
+
+| 예제 | 준비 |
+| --- | --- |
+| Shader Live | `.\.venv\Scripts\python.exe scripts/fetch_assets.py footage 10708812` |
+| 무중력 과일 | `.\.venv\Scripts\python.exe -B scripts/setup_environment.py --install --with body`, `scripts/fetch_assets.py footage 7525471`, `scripts/fetch_assets.py pose-model` |
+| 주방 글리치 | `scripts/fetch_assets.py footage 7525471`. Git을 설치할 때 함께 들어온 Git Bash에서 `bash run_glitch.sh`를 실행합니다. |
+
+이 예제들은 `ffmpeg`와 `ffprobe`를 PATH에서 찾습니다. WinGet으로 설치했다면 새 터미널에서 바로 잡힙니다. MediaPipe와 MuJoCo는 Python 3.12에서 확인했습니다.

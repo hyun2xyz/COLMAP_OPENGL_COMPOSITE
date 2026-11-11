@@ -37,6 +37,26 @@ python scripts/find_materials.py hdri "forest"                    # CC0 HDRI 찾
 
 영상·프레임·결과는 `work/<숏>/`에 저장되며 Git에는 올라가지 않습니다. 용량이 크면 `--work /외장SSD/폴더`를 붙이거나 환경변수 `VFX_WORK`를 지정하세요. 결과는 덮어쓰지 않으니, 다시 만들 때는 새 `--output` 폴더를 지정합니다.
 
+## 파이프라인 밖의 예제
+
+`python -m pipeline`의 숏 외에, 각자 README와 명령을 가진 예제가 `examples/`에 있습니다. 무엇이 더 필요한지는
+`scripts/setup_environment.py --check`의 `examples` 항목이 알려 주고, 영상과 모델은 `scripts/fetch_assets.py`로 받습니다.
+
+| 예제 | 내용 | 더 필요한 것 |
+| --- | --- | --- |
+| [Shader Live](examples/shader_live/README.md) | 카메라와 바닥 면을 풀고(COLMAP 또는 평면 호모그래피) GLSL 효과 하나를 장면에 고정. 작품 3편 | 영상 받기 |
+| [무중력 과일](examples/fruit_physics/README.md) | MediaPipe로 사람의 3D 자세를 잡아 보이지 않는 강체로 만들고, MuJoCo 무중력 과일을 OpenGL로 렌더 | `--install --with body`, 영상·포즈 모델 받기 |
+| [주방 글리치](examples/kitchen_glitch/README.md) | FFmpeg 필터만으로 움직이는 사람만 깨지는 데이터모시 | 영상 받기, bash(Windows는 Git Bash) |
+| [백보드 물](examples/backboard_water/README.md) | 네 모서리 PnP + OpenGL 물방울 | 없음 (`--demo`) |
+
+```sh
+python scripts/setup_environment.py --install --with body     # 과일 예제를 쓸 때만: MediaPipe, MuJoCo
+python scripts/fetch_assets.py list                           # 받을 수 있는 영상과 모델, 받은 것
+python scripts/fetch_assets.py footage 10708812               # Pexels 번호로 받기
+```
+
+몸 추적은 MediaPipe로 바로 시작합니다. 더 정밀한 SAM 3D Body는 Hugging Face에서 접근 신청과 승인이 먼저 필요합니다: [SAM 3D Body 안내](docs/sam-3d-body.md).
+
 ## 공정
 
 | 단계 | 하는 일 | 결과 | 통과 기준 |
@@ -83,8 +103,9 @@ PnP 오차가 작다는 것은 **맞춘 그 점들**에 잘 겹친다는 뜻일 
 | `tracking/` | LK/PnP 프레임별 포즈(`measure.py`), COLMAP → Three 카메라(`export_colmap.py`) |
 | `Source/` | Node 스크립트와 three.js 의존성(`npm ci --prefix Source`) |
 | `docs/` | 설치, 워크플로, 재료 찾기, 검증 범위, 예제 설명 |
-| `examples/` | 백보드 물(네 모서리 PnP + OpenGL 물방울) |
+| `examples/` | 백보드 물, Shader Live, 무중력 과일, 주방 글리치. 위의 "파이프라인 밖의 예제" |
 | `Camera/` `ae/` `scene/` | [Drift 예제](docs/drift.md)(보온병·찻잔 + 물, After Effects 빌드) |
-| `scripts/` | 설치 점검(`setup_environment.py`), 긴 계산 분리 실행(`jobs.py`), 재료 찾기(`find_materials.py`) |
+| `scripts/` | 설치 점검(`setup_environment.py`), 예제 영상·모델 받기(`fetch_assets.py`), 긴 계산 분리 실행(`jobs.py`), 재료 찾기(`find_materials.py`) |
+| `tools/` | 브레이크다운 영상 제작 도구(`tools/breakdown`, [설명](docs/breakdown/README.md)), 플레이트 조명 측정, OBS 녹화 안전 종료 |
 
 모든 예제의 공통 순서는 [합성 프로세스 정리](docs/pipeline/README.md)에, 실제로 확인한 컴퓨터와 수치는 [검증 범위](docs/validation.md)에, 출처는 [THIRD_PARTY_NOTICES](THIRD_PARTY_NOTICES.md)에 있습니다.

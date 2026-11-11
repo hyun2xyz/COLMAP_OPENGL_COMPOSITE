@@ -37,3 +37,17 @@ examples/**/lookdev/
 /work/
 tools.local.json
 *.part
+
+# Examples outside the pipeline: downloaded inputs, per-piece work and model weights stay local
+examples/fruit_physics/work/
+examples/fruit_physics/models/
+examples/fruit_physics/venv/
+examples/shader_live/footage/
+examples/shader_live/pieces/*/work/
+examples/shader_live/pieces/*/out/
+examples/kitchen_glitch/work/
+*.task
+*.ckpt
+*.pt
+*.pth
+*.safetensors

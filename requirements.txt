@@ -1,7 +1,8 @@
-# Live-action composite pipeline (python -m pipeline) and the Drift water renderer.
+# Live-action composite pipeline (python -m pipeline), the Drift water renderer and examples/shader_live.
 # Every package ships wheels for macOS (Apple Silicon/Intel), Windows x64 and Linux x64.
 numpy>=2,<3
 opencv-python-headless>=4.10,<6
 scipy>=1.13,<2
 pycolmap==4.2.1
 moderngl==5.12.0
+pillow>=11,<14
