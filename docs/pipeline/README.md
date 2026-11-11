@@ -15,7 +15,6 @@
 | [백보드 물](../../examples/backboard_water/README.md) | 유리 백보드 네 모서리 PnP | 백보드 평면 기준(가로 1.8 가정) | 물방울 부착·합류·흐름 모델 | ModernGL GLSL, Straight 알파를 AE에서 플레이트 위에 |
 | [Shader Live](../../examples/shader_live/README.md) | pycolmap SfM 또는 평면 호모그래피 솔버 | RANSAC 평면, 기준 화소로 원점과 +x, 카메라 높이로 축척 | 없음 | 화면 전체 GLSL 프래그먼트 셰이더 하나(ModernGL). 플레이트 반사·재투영·색 키. AE용 Straight 알파 |
 | [무중력 과일](../../examples/fruit_physics/README.md) | 고정 카메라 가정, 몸은 MediaPipe 33관절 + PnP | 사람 기준 좌표, 초점거리 스윕 | MuJoCo 무중력 강체, 몸은 보이지 않는 캡슐 | ModernGL 과일 렌더, 인물 마스크로 가림 |
-| [주방 글리치](../../examples/kitchen_glitch/README.md) | 없음 (2D) | 없음 | 없음 | FFmpeg 필터그래프만 사용 |
 
 렌더 경로는 이름을 정확히 적습니다. 최종 픽셀은 ModernGL로 그리는 **네이티브 OpenGL 3.3 이상**(Mac은 4.1 Metal)이고, 브라우저 WebGL이 아닙니다. Three.js는 Node에서 물 표면 메시와 Drift 소품(GLB)을 만드는 데만 씁니다.
 

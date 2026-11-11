@@ -22,7 +22,7 @@
 2. **예제 숏 하나**: `python -m pipeline composite hall_water`를 실행합니다. 4초 숏 하나에 Apple M2 Max 기준 약 1분이 걸리고, 처음에는 영상 다운로드 시간이 더 듭니다. 끝나면 `work/hall_water/render/final/`의 검수 시트를 보고 `Composite.mp4`를 끝까지 재생합니다.
 3. **내 영상**: "이런 장면에 이런 물체를 합성하고 싶어요"라고 말하면 에이전트가 [재료 찾기 규칙](docs/materials.md)에 따라 쓸 수 있는 영상과 HDRI를 찾아 후보를 보여 주고, `shots/`에 설정 파일을 만듭니다. 아무 영상이나 되는 것은 아닙니다. 하드컷 없이 카메라가 움직이고, 질감이 보이며, 줌이 고정된 짧은 숏이어야 합니다.
 
-4. **다른 예제**: GLSL 효과를 장면에 고정하는 Shader Live, 사람 몸에 부딪히는 무중력 과일, FFmpeg 글리치는 `examples/`에 있습니다. "Shader Live 예제를 해 보고 싶어요"처럼 말하면 됩니다. 필요한 것은 [README](README.md#파이프라인-밖의-예제)에 있습니다. 몸 추적은 MediaPipe로 바로 시작하고, SAM 3D Body를 쓰려면 [접근 신청](docs/sam-3d-body.md)을 미리 해 둡니다.
+4. **다른 예제**: GLSL 효과를 장면에 고정하는 Shader Live, 사람 몸에 부딪히는 무중력 과일은 `examples/`에 있습니다. "Shader Live 예제를 해 보고 싶어요"처럼 말하면 됩니다. 필요한 것은 [README](README.md#파이프라인-밖의-예제)에 있습니다. 몸 추적은 MediaPipe로 바로 시작하고, SAM 3D Body를 쓰려면 [접근 신청](docs/sam-3d-body.md)을 미리 해 둡니다.
 
 자동 검사가 통과해도 **영상을 끝까지 재생해서 본 것은 아닙니다.** 검수 시트와 실제 재생을 확인한 뒤에 완료로 기록합니다. 컴퓨터별로 실제로 확인한 범위는 [검증 범위](docs/validation.md)에 있습니다.
 

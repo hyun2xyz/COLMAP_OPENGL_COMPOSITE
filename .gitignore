@@ -45,7 +45,6 @@ examples/fruit_physics/venv/
 examples/shader_live/footage/
 examples/shader_live/pieces/*/work/
 examples/shader_live/pieces/*/out/
-examples/kitchen_glitch/work/
 *.task
 *.ckpt
 *.pt

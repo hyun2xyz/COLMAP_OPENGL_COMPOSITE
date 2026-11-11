@@ -59,6 +59,5 @@ TASK_PYTHON="$("$TASK_BREW" --prefix python@3.13)/bin/python3.13"
 | --- | --- |
 | Shader Live | `.venv/bin/python scripts/fetch_assets.py footage 10708812` |
 | 무중력 과일 | `.venv/bin/python -B scripts/setup_environment.py --install --with body`, `scripts/fetch_assets.py footage 7525471`, `scripts/fetch_assets.py pose-model` |
-| 주방 글리치 | `scripts/fetch_assets.py footage 7525471`. 터미널에서 `bash run_glitch.sh`를 실행합니다. |
 
 이 예제들은 `ffmpeg`와 `ffprobe`를 PATH에서 찾습니다. Homebrew로 설치했다면 바로 잡힙니다. 이 예제들은 Windows에서만 확인했고 Mac에서는 실행해 보지 못했습니다.

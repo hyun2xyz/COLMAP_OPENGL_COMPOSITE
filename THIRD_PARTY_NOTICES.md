@@ -4,7 +4,7 @@
 
 ## 이 저장소의 기원
 
-- [hyun2xyz/threejs-colmap-drift](https://github.com/hyun2xyz/threejs-colmap-drift) commit `045c4c4a08ec65a5e03ee310325dd22ab45db8f6`의 내용을 같은 경로에 옮겨 담았습니다. 해당되는 것은 Drift 예제, `Water/`, `tracking/`, `examples/backboard_water`, `docs/pipeline`입니다. 2026-11-11에 같은 저장소의 commit `8ac31c6`에서 Shader Live·주방 글리치·무중력 과일 예제, 브레이크다운 제작 도구, OBS 메모, 예제 영상 받기 도구를 더 옮겼습니다. p5.js(LGPL-2.1)를 쓰는 활주로 두들 예제만 넣지 않았습니다.
+- [hyun2xyz/threejs-colmap-drift](https://github.com/hyun2xyz/threejs-colmap-drift) commit `045c4c4a08ec65a5e03ee310325dd22ab45db8f6`의 내용을 같은 경로에 옮겨 담았습니다. 해당되는 것은 Drift 예제, `Water/`, `tracking/`, `examples/backboard_water`, `docs/pipeline`입니다. 2026-11-11에 같은 저장소의 commit `8ac31c6`에서 Shader Live·주방 글리치·무중력 과일 예제, 브레이크다운 제작 도구, OBS 메모, 예제 영상 받기 도구를 더 옮겼습니다. p5.js(LGPL-2.1)를 쓰는 활주로 두들 예제만 넣지 않았습니다. 주방 글리치 예제는 그 뒤 패키지에서 뺐습니다.
 - `pipeline/`과 `shots/`는 2026-11-06 MacBook 테스트(외장 SSD 작업 폴더)의 Codex 세션 스크립트를 옮겨 정리한 것입니다. 실내 물, 정원 공, 채석장 천, 채석장 재조명이 여기에 해당합니다. 경로를 숏 설정 기반으로 바꾸고, COLMAP CLI 단계를 pycolmap으로 바꾸고, Windows에서 동작하도록 심볼릭 링크를 복사로 바꿨습니다.
 - `scripts/jobs.py`와 학생용 문서 구성은 [hyun2xyz/AFTEREFFECT_COLMAP](https://github.com/hyun2xyz/AFTEREFFECT_COLMAP)(MIT, 같은 저작자)에서 가져왔습니다.
 
@@ -23,7 +23,7 @@
 
 | 예제 | 원본 | 제작자 | 라이선스 |
 | --- | --- | --- | --- |
-| `kitchen_glitch`, `fruit_physics` | [Woman Dancing in the Kitchen](https://www.pexels.com/video/woman-dancing-in-the-kitchen-7525471/) | SHVETS production | Pexels License |
+| `fruit_physics` | [Woman Dancing in the Kitchen](https://www.pexels.com/video/woman-dancing-in-the-kitchen-7525471/) | SHVETS production | Pexels License |
 | `shader_live` 06 | [Top View of an Empty Basketball Court](https://www.pexels.com/video/top-view-of-an-empty-basketball-court-10708812/) | Devin Huynh | Pexels License |
 | `shader_live` 08 | [Aerial View of Spacious Empty Parking Lot](https://www.pexels.com/video/aerial-view-of-spacious-empty-parking-lot-34696869/) | JIUN-JE LIN | Pexels License |
 | `shader_live` 01 | [Road Through Sandy Desert at Sunrise](https://www.pexels.com/video/road-through-sandy-desert-at-sunrise-10872797/) | Atif Dar | Pexels License |

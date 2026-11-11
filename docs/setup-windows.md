@@ -50,6 +50,5 @@ py -3.13 -B scripts/setup_environment.py --install
 | --- | --- |
 | Shader Live | `.\.venv\Scripts\python.exe scripts/fetch_assets.py footage 10708812` |
 | 무중력 과일 | `.\.venv\Scripts\python.exe -B scripts/setup_environment.py --install --with body`, `scripts/fetch_assets.py footage 7525471`, `scripts/fetch_assets.py pose-model` |
-| 주방 글리치 | `scripts/fetch_assets.py footage 7525471`. Git을 설치할 때 함께 들어온 Git Bash에서 `bash run_glitch.sh`를 실행합니다. |
 
 이 예제들은 `ffmpeg`와 `ffprobe`를 PATH에서 찾습니다. WinGet으로 설치했다면 새 터미널에서 바로 잡힙니다. MediaPipe와 MuJoCo는 Python 3.12에서 확인했습니다.

@@ -46,7 +46,6 @@ python scripts/find_materials.py hdri "forest"                    # CC0 HDRI 찾
 | --- | --- | --- |
 | [Shader Live](examples/shader_live/README.md) | 카메라와 바닥 면을 풀고(COLMAP 또는 평면 호모그래피) GLSL 효과 하나를 장면에 고정. 작품 3편 | 영상 받기 |
 | [무중력 과일](examples/fruit_physics/README.md) | MediaPipe로 사람의 3D 자세를 잡아 보이지 않는 강체로 만들고, MuJoCo 무중력 과일을 OpenGL로 렌더 | `--install --with body`, 영상·포즈 모델 받기 |
-| [주방 글리치](examples/kitchen_glitch/README.md) | FFmpeg 필터만으로 움직이는 사람만 깨지는 데이터모시 | 영상 받기, bash(Windows는 Git Bash) |
 | [백보드 물](examples/backboard_water/README.md) | 네 모서리 PnP + OpenGL 물방울 | 없음 (`--demo`) |
 
 ```sh
@@ -103,7 +102,7 @@ PnP 오차가 작다는 것은 **맞춘 그 점들**에 잘 겹친다는 뜻일 
 | `tracking/` | LK/PnP 프레임별 포즈(`measure.py`), COLMAP → Three 카메라(`export_colmap.py`) |
 | `Source/` | Node 스크립트와 three.js 의존성(`npm ci --prefix Source`) |
 | `docs/` | 설치, 워크플로, 재료 찾기, 검증 범위, 예제 설명 |
-| `examples/` | 백보드 물, Shader Live, 무중력 과일, 주방 글리치. 위의 "파이프라인 밖의 예제" |
+| `examples/` | 백보드 물, Shader Live, 무중력 과일. 위의 "파이프라인 밖의 예제" |
 | `Camera/` `ae/` `scene/` | [Drift 예제](docs/drift.md)(보온병·찻잔 + 물, After Effects 빌드) |
 | `scripts/` | 설치 점검(`setup_environment.py`), 예제 영상·모델 받기(`fetch_assets.py`), 긴 계산 분리 실행(`jobs.py`), 재료 찾기(`find_materials.py`) |
 | `tools/` | 브레이크다운 영상 제작 도구(`tools/breakdown`, [설명](docs/breakdown/README.md)), 플레이트 조명 측정, OBS 녹화 안전 종료 |

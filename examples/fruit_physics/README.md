@@ -8,7 +8,8 @@
 
 ## 소스
 
-[주방 글리치](../kitchen_glitch/README.md)와 같은 Pexels 7525471(720×1280, 25fps, 391프레임)을 씁니다. 결과는 1080×1920 업스케일입니다.
+- Pexels 7525471 "Woman Dancing in the Kitchen", 촬영 SHVETS production, Pexels License. [source/SOURCE.md](source/SOURCE.md)
+- 실제 파일은 720×1280, 25fps, 391프레임입니다. 결과는 1080×1920 업스케일입니다.
 
 ## 사용한 오픈소스 (2026-11-09 설치 버전)
 
@@ -33,7 +34,7 @@ python -m venv venv && ./venv/Scripts/python -m pip install -r requirements.txt 
 mkdir -p models work/frames
 curl -L -o models/pose_landmarker_heavy.task \
   https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task
-ffmpeg -v error -y -i ../kitchen_glitch/source/Pexels_7525471_720x1280.mp4 -start_number 0 work/frames/%04d.png   # 0부터 번호
+ffmpeg -v error -y -i source/Pexels_7525471_720x1280.mp4 -start_number 0 work/frames/%04d.png   # 0부터 번호
 
 ./venv/Scripts/python track_pose.py          # → work/pose.json, work/mask/
 ./venv/Scripts/python solve_body.py sweep    # 초점거리별 재투영 오차 확인

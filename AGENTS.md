@@ -12,7 +12,7 @@ global agent rules or skills.
   Never overwrite an output folder; a re-render goes to a new `--output`.
 - Gates are real: if `qa-camera` fails, do not ground/simulate/render on that
   camera. Change `camera.focal_px`, the trim or the clip, and say why.
-- `examples/` (Shader Live, zero-g fruit, kitchen glitch, backboard water) are not pipeline shots. Follow the one
+- `examples/` (Shader Live, zero-g fruit, backboard water) are not pipeline shots. Follow the one
   example's README, read `"examples"` in `setup_environment.py --check`, and get inputs with
   `scripts/fetch_assets.py`. Their footage, models and outputs stay in ignored folders inside the example.
 - Body tracking starts with MediaPipe. SAM 3D Body weights are gated: point the student to `docs/sam-3d-body.md`,

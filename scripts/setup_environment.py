@@ -27,12 +27,11 @@ PACKAGES = ("numpy", "opencv-python-headless", "scipy", "pycolmap", "moderngl", 
 # Optional package groups: --install --with <group>
 EXTRAS = {"body": ("requirements-body.txt", ("mediapipe", "mujoco"))}
 # Examples outside the pipeline. Their inputs are not in git; scripts/fetch_assets.py downloads them.
-KITCHEN_CLIP = "examples/kitchen_glitch/source/Pexels_7525471_720x1280.mp4"
+FRUIT_CLIP = "examples/fruit_physics/source/Pexels_7525471_720x1280.mp4"
 EXAMPLES = {
     "backboard_water": {},
     "shader_live": {"files": ("examples/shader_live/footage/Pexels_10708812.mp4",)},
-    "kitchen_glitch": {"files": (KITCHEN_CLIP,), "tools": ("bash",)},
-    "fruit_physics": {"extras": ("body",), "files": (KITCHEN_CLIP, "examples/fruit_physics/models/pose_landmarker_heavy.task")},
+    "fruit_physics": {"extras": ("body",), "files": (FRUIT_CLIP,"examples/fruit_physics/models/pose_landmarker_heavy.task")},
 }
 
 

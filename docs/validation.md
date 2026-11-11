@@ -59,14 +59,13 @@
 
 ## 2026-11-11 · Windows 11 PC (NVIDIA RTX 4070 Ti SUPER, Python 3.12.10)
 
-새로 받은 저장소 폴더에서 `setup_environment.py --install --with body`, `--configure`, `fetch_assets.py footage all`, `fetch_assets.py pose-model`을 실행한 뒤 확인했습니다.
+새로 받은 저장소 폴더에서 `setup_environment.py --install --with body`, `--configure`, `fetch_assets.py footage all`, `fetch_assets.py pose-model`을 실행한 뒤 확인했습니다. 이날 주방 글리치 예제도 실행해 결과 영상까지 만들었지만, 그 뒤 패키지에서 뺐으므로 아래에는 남은 예제만 적습니다.
 
-- `--check`: `"ready": true`, OpenGL 렌더러 NVIDIA GeForce RTX 4070 Ti SUPER, `examples`의 네 예제 모두 빠진 것 없음. 설치된 버전은 moderngl 5.12.0, MediaPipe 1.2.2, MuJoCo 4.0.0입니다. MediaPipe가 opencv-contrib-python을 함께 설치하지만 `cv2`의 SIFT와 solvePnP는 그대로 동작했습니다.
+- `--check`: `"ready": true`, OpenGL 렌더러 NVIDIA GeForce RTX 4070 Ti SUPER, `examples`의 세 예제 모두 빠진 것 없음. 설치된 버전은 moderngl 5.12.0, MediaPipe 1.2.2, MuJoCo 4.0.0입니다. MediaPipe가 opencv-contrib-python을 함께 설치하지만 `cv2`의 SIFT와 solvePnP는 그대로 동작했습니다.
 - 단위 테스트 14개 통과, `compileall`(pipeline, scripts, tracking, examples, tools) 통과.
 - `python -m pipeline composite hall_water`: 96/96프레임, 카메라 검수 p95 1.443px·최대 4.560px·트랙 718개, 배경 MAE 최대 2.56으로 수치 검사 통과. **검수 시트와 영상은 열어 보지 않았습니다.**
 - 백보드 물 `--demo --frames 12`: 미리보기 세 장과 `Composite.mp4`, `Alpha.mov` 생성.
 - Shader Live `08_Lava_Fissures`: 프레임 추출, 호모그래피 풀이(인라이어 최소 1810), 평면 맞춤, 스틸, `finish.py`까지 `FINISHED_OK`. 결과 네 파일 생성.
-- 주방 글리치: Git Bash에서 `run_glitch.sh 12`로 `Kitchen_Datamosh_Glitch.mp4` 생성.
 - 무중력 과일은 이 폴더에서 패키지 import와 입력 파일 준비까지만 확인했습니다. 전체 실행은 옮겨 오기 전 저장소에서 같은 코드로 같은 날 확인했습니다.
 - 위 예제들의 결과 영상을 이 폴더에서 재생해 보거나 스틸을 눈으로 확인하지는 않았습니다. 생성 여부와 종료 코드, 수치만 확인했습니다.
 - 설치와 받기를 마친 폴더는 4.2GB였습니다(`.venv` 2.3GB, `Source/node_modules` 197MB, 예제 작업 파일 1.4GB, `work/` 380MB).

@@ -1,6 +1,6 @@
 ---
 name: opengl-composite
-description: Set up a macOS/Windows/Linux computer and guide a student, one step at a time, from finding a licensed live-action clip to a COLMAP/PnP camera, a CPU simulation (SPH water, rigid spheres, PBD cloth) rendered with native OpenGL, and numerical + visual QA. Also covers the examples outside the pipeline: world-locked GLSL effects (Shader Live), MediaPipe body tracking with MuJoCo physics, an FFmpeg-only glitch and backboard water. Use inside this repository only.
+description: Set up a macOS/Windows/Linux computer and guide a student, one step at a time, from finding a licensed live-action clip to a COLMAP/PnP camera, a CPU simulation (SPH water, rigid spheres, PBD cloth) rendered with native OpenGL, and numerical + visual QA. Also covers the examples outside the pipeline: world-locked GLSL effects (Shader Live), MediaPipe body tracking with MuJoCo physics, and backboard water. Use inside this repository only.
 ---
 
 # OpenGL composite
@@ -52,7 +52,7 @@ The lesson ends at a reviewed composite.
 
 ## Examples outside the pipeline
 
-`python -m pipeline` covers the shots in `shots/`. Four more examples live in `examples/`, each with its own README
+`python -m pipeline` covers the shots in `shots/`. Three more examples live in `examples/`, each with its own README
 and commands; read only the one in use. `scripts/setup_environment.py --check` lists what each still needs under
 `"examples"`. Inputs: `python scripts/fetch_assets.py list | footage <number> | pose-model`. These examples call
 `ffmpeg`/`ffprobe` from PATH and keep their outputs inside the example folder (ignored by git), not in `work/`.
@@ -60,7 +60,6 @@ and commands; read only the one in use. `scripts/setup_environment.py --check` l
 | Example | What it teaches | Check that it worked |
 | --- | --- | --- |
 | `backboard_water` | four-corner PnP, GLSL drops | `--demo --frames 12` writes `preview_006.png` with drops on a backboard |
-| `kitchen_glitch` | FFmpeg-only datamosh from a motion mask (needs `bash`; Git Bash on Windows) | `Kitchen_Datamosh_Glitch.mp4`; only the moving person breaks into blocks |
 | `shader_live` | camera and plane solve (COLMAP or plane homography), one world-locked GLSL fragment shader | `work/check_plane.jpg` grid stays on the surface in all three frames, then stills, then `finish.py` ends with `FINISHED_OK` |
 | `fruit_physics` | MediaPipe pose to invisible rigid bodies, MuJoCo zero gravity, OpenGL fruit (needs `--install --with body`) | `Fruit_ZeroG_Physics.mp4`; fruit bounce off the dancer and pass behind her |
 

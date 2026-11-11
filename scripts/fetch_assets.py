@@ -23,8 +23,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 CDN = "https://videos.pexels.com/video-files/"
 CLIPS = {
-    "7525471": ("examples/kitchen_glitch/source/Pexels_7525471_720x1280.mp4", "7525471/7525471-hd_1080_1920_25fps.mp4",
-                "0b51020f49a03bcf109b7705076dfd823e0fc73ea3fa04071cf1495114275a04", "woman-dancing-in-the-kitchen-7525471", "kitchen_glitch, fruit_physics"),
+    "7525471": ("examples/fruit_physics/source/Pexels_7525471_720x1280.mp4", "7525471/7525471-hd_1080_1920_25fps.mp4",
+                "0b51020f49a03bcf109b7705076dfd823e0fc73ea3fa04071cf1495114275a04", "woman-dancing-in-the-kitchen-7525471", "fruit_physics"),
     "10708812": ("examples/shader_live/footage/Pexels_10708812.mp4", "10708812/10708812-hd_1920_1080_30fps.mp4",
                  "7ea653251995bf6e1ef89351f6034a4cf2dd1feec1b10a6ef89587312affee19", "top-view-of-an-empty-basketball-court-10708812", "shader_live 06_Marbled_Court"),
     "34696869": ("examples/shader_live/footage/Pexels_34696869.mp4", "34696869/14706282_1920_1080_30fps.mp4",
