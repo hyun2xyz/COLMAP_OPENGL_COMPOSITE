@@ -1,0 +1,25 @@
+{
+ "name": "Liquid_Glass_Frozen_Splash",
+ "pexels": 7578547,
+ "credit": "Kindel Media (Pexels 7578547, Pexels License)",
+ "source": "../../lidar_scan/footage/Pexels_7578547.mp4",
+ "start": 120,
+ "frames": 240,
+ "step": 1,
+ "frozen": {
+  "burst_origin": [
+   -0.08,
+   -3.65,
+   1.44
+  ],
+  "burst_frame": 14,
+  "freeze_dur_s": 1.25,
+  "n_hero": 30,
+  "n_mid": 160,
+  "n_micro": 790,
+  "ior": 1.44,
+  "dispersion": 0.016,
+  "caustic_gain": 1.05,
+  "seed": 2026
+ }
+}

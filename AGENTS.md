@@ -42,3 +42,9 @@ global agent rules or skills.
   sandbox or security settings to avoid it.
 - Read small JSON reports (`checkpoint.json`, `qa/*.json`, `render-report.json`)
   instead of long logs or full arrays.
+- **GitHub Issue Work-Log Rule (필수)**: Whenever work is completed (new VFX example,
+  lookdev/render/breakdown update, solver upgrade, or bug fix) and committed/pushed,
+  record what was done in this repository's GitHub Issues (`gh issue`). If a related
+  issue already exists, append a concise comment (`gh issue comment`); otherwise open
+  a new issue (`gh issue create`) summarizing the scope, changed/added files, key
+  parameters or fixes, verification results, and commit hash.

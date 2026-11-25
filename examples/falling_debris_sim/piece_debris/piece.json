@@ -1,0 +1,17 @@
+{
+  "name": "Falling_Objects_Shatter_Physics",
+  "pexels": 32109492,
+  "credit": "Pexels 32109492 (Pexels License)",
+  "source": "../../liquid_chrome/footage/Pexels_32109492.mp4",
+  "start": 0,
+  "frames": 240,
+  "step": 1,
+  "fps_num": 25,
+  "fps_den": 1,
+  "debris_sim": {
+    "seed": 2035,
+    "back_wall_y": 1.55,
+    "gravity": -9.81,
+    "substeps": 40
+  }
+}

@@ -1,0 +1,95 @@
+{
+ "name": "Liquid_Glass_Hall",
+ "pexels": 7578546,
+ "credit": "Video of a House Interior by Kindel Media (Pexels 7578546, Pexels License)",
+ "source": "../footage/Pexels_7578546.mp4",
+ "start": 20,
+ "frames": 270,
+ "step": 1,
+ "hfov": 68.0,
+ "refine_focal": true,
+ "sift": 5000,
+ "overlap": 12,
+ "smooth": 9,
+ "plane": {
+  "frame": 135,
+  "roi": [
+   200,
+   550,
+   1700,
+   1080
+  ],
+  "anchor": [
+   960,
+   740
+  ],
+  "xdir": [
+   1400,
+   740
+  ],
+  "cam_h": 1.35,
+  "grid": 0.5,
+  "grid_n": 18,
+  "level": false,
+  "thresh": 0.008
+ },
+ "sun": {
+  "az": 122.0,
+  "el": 52.0
+ },
+ "glass": {
+  "ior": 1.46,
+  "dispersion": 0.018,
+  "tint": [
+   0.075,
+   0.025,
+   0.018
+  ],
+  "caustic_gain": 1.05,
+  "shadow_gain": 0.34,
+  "flute_freq": 56.0,
+  "flute_amp": 0.19,
+  "metaball_k": 0.32,
+  "proxy_dist": 7.0,
+  "cluster1": [
+   1.12,
+   -7.6,
+   0.94,
+   0.86
+  ],
+  "flute_pos": [
+   -0.88,
+   -2.2,
+   1.22
+  ],
+  "flute_size": [
+   0.42,
+   0.048,
+   0.88
+  ],
+  "flute_yaw_deg": 18.0,
+  "cluster2": [
+   0.05,
+   3.65,
+   1.55,
+   1.28
+  ]
+ },
+ "breakdown": {
+  "compare_src": [
+   0,
+   120
+  ],
+  "process_start_src": 60,
+  "slow": {
+   "refract": [
+    0.5,
+    60
+   ],
+   "caustic": [
+    0.5,
+    60
+   ]
+  }
+ }
+}

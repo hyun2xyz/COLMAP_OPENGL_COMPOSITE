@@ -1,0 +1,48 @@
+{
+ "name": "LiDAR_Scan_Gallery",
+ "pexels": 7578547,
+ "credit": "Kindel Media (Pexels 7578547, Pexels License)",
+ "source": "../footage/Pexels_7578547.mp4",
+ "start": 120,
+ "frames": 240,
+ "step": 1,
+ "hfov": 72.0,
+ "refine_focal": true,
+ "sift": 5000,
+ "overlap": 12,
+ "smooth": 9,
+ "plane": {
+  "frame": 120,
+  "roi": [
+   200,
+   620,
+   1720,
+   1080
+  ],
+  "anchor": [
+   960,
+   780
+  ],
+  "xdir": [
+   1400,
+   780
+  ],
+  "cam_h": 1.45,
+  "grid": 0.5,
+  "grid_n": 18,
+  "level": false,
+  "thresh": 0.008
+ },
+ "sun": {
+  "az": 135.0,
+  "el": 42.0
+ },
+ "lidar": {
+  "pulse_period_s": 2.8,
+  "wave_speed_mps": 6.2,
+  "band_width_m": 2.4,
+  "contour_step_m": 0.25,
+  "grid_step_m": 0.5,
+  "point_size_px": 3.2
+ }
+}

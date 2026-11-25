@@ -32,6 +32,8 @@ EXAMPLES = {
     "backboard_water": {},
     "shader_live": {"files": ("examples/shader_live/footage/Pexels_10708812.mp4",)},
     "fruit_physics": {"extras": ("body",), "files": (FRUIT_CLIP,"examples/fruit_physics/models/pose_landmarker_heavy.task")},
+    "slit_scan": {"extras": ("body",), "files": ("examples/slit_scan/footage/Pexels_8928132.mp4", "examples/fruit_physics/models/pose_landmarker_heavy.task")},
+    "space_distortion": {"extras": ("body",), "files": ("examples/space_distortion/footage/Pexels_32109503.mp4", "examples/space_distortion/footage/Pexels_13607734.mp4", "examples/space_distortion/footage/Pexels_5359146.mp4", "examples/fruit_physics/models/pose_landmarker_heavy.task")},
 }
 
 

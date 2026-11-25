@@ -1,0 +1,17 @@
+{
+ "name": "Mirror_Dimension_Prism_Fold",
+ "pexels": 7578546,
+ "credit": "Kindel Media (Pexels 7578546, Pexels License)",
+ "source": "../../liquid_glass/footage/Pexels_7578546.mp4",
+ "start": 20,
+ "frames": 270,
+ "step": 1,
+ "mirror": {
+  "n_slabs": 42,
+  "n_poly": 34,
+  "n_micro": 360,
+  "ior": 1.54,
+  "dispersion": 0.022,
+  "seed": 2030
+ }
+}

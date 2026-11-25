@@ -1,0 +1,16 @@
+{
+ "name": "Frozen_Glass_Motion_Echo",
+ "pexels": 32109503,
+ "credit": "Pexels 32109503 (Pexels License)",
+ "source": "../../space_distortion/footage/Pexels_32109503.mp4",
+ "start": 0,
+ "frames": 163,
+ "step": 1,
+ "echo": {
+  "spawn_frames": [8, 22, 36, 50, 64, 78, 92, 106, 120, 134],
+  "glide_dur_s": 0.65,
+  "ior": 1.46,
+  "dispersion": 0.018,
+  "seed": 2029
+ }
+}

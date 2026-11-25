@@ -1,0 +1,38 @@
+{
+ "name": "Minecraft_Steve_Mocap_Rig",
+ "pexels": 8928132,
+ "credit": "RDNE Stock project (Pexels 8928132, Pexels License)",
+ "source": "../../slit_scan/footage/Pexels_8928132.mp4",
+ "start": 55,
+ "frames": 240,
+ "step": 1,
+ "fps_num": 30,
+ "fps_den": 1,
+ "hfov": 60.0,
+ "solver": "homography",
+ "plane": {
+  "frame": 100,
+  "roi": [
+   100,
+   840,
+   1820,
+   1080
+  ],
+  "anchor": [
+   960,
+   990
+  ],
+  "xdir": [
+   1400,
+   990
+  ],
+  "cam_h": 0.93,
+  "grid": 0.5,
+  "grid_n": 10,
+  "level": true
+ },
+ "sun": {
+  "az": 180,
+  "el": 70
+ }
+}

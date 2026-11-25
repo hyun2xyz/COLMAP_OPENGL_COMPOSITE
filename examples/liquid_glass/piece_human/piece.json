@@ -1,0 +1,34 @@
+{
+ "name": "Liquid_Glass_Frozen_Human",
+ "pexels": 7251765,
+ "credit": "MART PRODUCTION (Pexels 7251765, Pexels License)",
+ "source": "../footage/Pexels_7251765.mp4",
+ "start": 0,
+ "frames": 225,
+ "step": 1,
+ "mask_dir": "work/solve_mask",
+ "refine_focal": true,
+ "sun": {
+  "az": 150.0,
+  "el": 72.0
+ },
+ "plane": {
+  "frame": 112,
+  "roi": [180, 620, 1900, 1070],
+  "anchor": [680, 900],
+  "xdir": [1400, 960],
+  "cam_h": 1.98
+ },
+ "frozen_human": {
+  "burst_frame": 20,
+  "freeze_dur_s": 1.25,
+  "cyl_occ": [-1.726, 0.643, 0.513, 4.8],
+  "n_hero": 36,
+  "n_mid": 184,
+  "n_micro": 820,
+  "ior": 1.44,
+  "dispersion": 0.016,
+  "caustic_gain": 0.85,
+  "seed": 2027
+ }
+}

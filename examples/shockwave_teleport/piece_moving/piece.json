@@ -1,0 +1,19 @@
+{
+  "name": "Moving_Cam_Sonic_Prism_Teleport",
+  "pexels": 32109503,
+  "credit": "Pexels 32109503 (Pexels License)",
+  "source": "../../space_distortion/footage/Pexels_32109503.mp4",
+  "start": 0,
+  "frames": 163,
+  "step": 1,
+  "fps_num": 25,
+  "fps_den": 1,
+  "moving_teleport": {
+    "t1_vanish": 34,
+    "t1_arrive": 48,
+    "t2_vanish": 96,
+    "t2_arrive": 110,
+    "delta1_3d": [1.18, 0.42, 0.0],
+    "delta2_3d": [-1.08, -0.22, 0.0]
+  }
+}

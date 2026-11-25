@@ -1,0 +1,17 @@
+{
+ "name": "Kinetic_Shockwave_Teleport",
+ "pexels": 8928133,
+ "credit": "RDNE Stock project (Pexels 8928133, Pexels License)",
+ "source": "../../vision_quadtree/footage/Pexels_8928133.mp4",
+ "start": 0,
+ "frames": 252,
+ "step": 1,
+ "teleport": {
+  "shift_px": 740,
+  "t1_vanish": 52,
+  "t1_arrive": 75,
+  "t2_vanish": 156,
+  "t2_arrive": 178,
+  "seed": 2028
+ }
+}

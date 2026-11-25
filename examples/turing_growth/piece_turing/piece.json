@@ -1,0 +1,47 @@
+{
+ "name": "Turing_Growth_Plaza",
+ "pexels": 14012992,
+ "credit": "Park and Streets in Town by SAULO LEITE (Pexels 14012992, Pexels License)",
+ "source": "../footage/Pexels_14012992.mp4",
+ "start": 0,
+ "frames": 216,
+ "step": 1,
+ "hfov": 72.0,
+ "refine_focal": false,
+ "solver": "homography",
+ "tilt": 0.0,
+ "smooth": 9,
+ "plane": {
+  "frame": 0,
+  "roi": [
+   100,
+   100,
+   1820,
+   980
+  ],
+  "anchor": [
+   960,
+   540
+  ],
+  "xdir": [
+   1400,
+   540
+  ],
+  "cam_h": 28.0,
+  "grid": 2.0,
+  "grid_n": 14,
+  "level": true
+ },
+ "sun": {
+  "az": -42.0,
+  "el": 48.0
+ },
+ "turing": {
+  "world_extent_m": 26.0,
+  "fountain_r_m": 5.45,
+  "feed": 0.0365,
+  "kill": 0.0615,
+  "steps_per_frame": 28,
+  "relief_gain": 1.38
+ }
+}

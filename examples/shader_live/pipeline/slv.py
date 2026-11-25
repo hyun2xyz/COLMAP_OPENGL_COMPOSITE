@@ -11,6 +11,7 @@ piece.json (all pixel values are in the full-res frame, origin top-left):
   plane.frame, plane.roi          the plane is fitted to the SfM points that project into roi [x0,y0,x1,y1] in that frame
   plane.anchor, plane.xdir        pixel that becomes the plane origin, pixel that gives the +x direction on the plane
   plane.cam_h                     height of that frame's camera above the plane in metres (sets the scale: COLMAP has none)
+  mask_dir                        optional: folder (piece-relative) of per-frame %04d.png masks, white = moving thing kept out of the COLMAP solve
   plane.offset                    optional: shift the plane along its normal by this many metres after the fit
   sun                             {"az": deg, "el": deg} direction TO the sun in plane coordinates (az from +x towards +y), or {"px": [x, y], "frame": k}
 
@@ -50,13 +51,19 @@ def solve(c):
     tmp = Path(tempfile.gettempdir()) / "slv" / c["dir"].name; shutil.rmtree(tmp, ignore_errors=True)   # short ASCII path: COLMAP dislikes long ones
     (tmp / "img").mkdir(parents=True); (tmp / "sfm").mkdir(); (tmp / "mask").mkdir()
     mr = c.get("mask_roi")                         # features only inside [x0,y0,x1,y1] (keeps sky, sun flare, water out of the solve)
+    md = c.get("mask_dir")                         # optional per-frame masks (piece-relative folder, %04d.png, white = moving, keep out)
     for i in range(N):
-        if mr:
-            m = np.zeros((h2, w2), np.uint8); m[int(mr[1] * s):int(mr[3] * s), int(mr[0] * s):int(mr[2] * s)] = 255; cv2.imwrite(str(tmp / "mask" / f"{i:04d}.jpg.png"), m)
+        if mr or md:
+            m = np.zeros((h2, w2), np.uint8) if mr else np.full((h2, w2), 255, np.uint8)
+            if mr: m[int(mr[1] * s):int(mr[3] * s), int(mr[0] * s):int(mr[2] * s)] = 255
+            if md:
+                dm = cv2.imread(str(c["dir"] / md / f"{i:04d}.png"), cv2.IMREAD_GRAYSCALE)
+                if dm is not None: m[cv2.resize(dm, (w2, h2), interpolation=cv2.INTER_NEAREST) > 127] = 0
+            cv2.imwrite(str(tmp / "mask" / f"{i:04d}.jpg.png"), m)
         cv2.imwrite(str(tmp / "img" / f"{i:04d}.jpg"), cv2.resize(frame(c, i), (w2, h2), interpolation=cv2.INTER_AREA), [cv2.IMWRITE_JPEG_QUALITY, 96])
     db = tmp / "sfm" / "database.db"; t0 = time.time()
     reader = pycolmap.ImageReaderOptions(); reader.camera_model = "SIMPLE_PINHOLE"; reader.camera_params = f"{f * s},{w2 / 2},{h2 / 2}"
-    if mr: reader.mask_path = str(tmp / "mask")
+    if mr or md: reader.mask_path = str(tmp / "mask")
     ext = pycolmap.FeatureExtractionOptions(); ext.sift.max_num_features = int(c.get("sift", 5000))
     pycolmap.extract_features(db, tmp / "img", camera_mode=pycolmap.CameraMode.SINGLE, reader_options=reader, extraction_options=ext)
     pair = pycolmap.SequentialPairingOptions(); pair.overlap = int(c.get("overlap", 10)); pair.loop_detection = False

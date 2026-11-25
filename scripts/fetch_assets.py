@@ -31,6 +31,14 @@ CLIPS = {
                  "cd9e45fea707586d2b90e650f8b3638135f2f7515afd62ff58f30ec47a0b9a28", "aerial-view-of-spacious-empty-parking-lot-34696869", "shader_live 08_Lava_Fissures"),
     "10872797": ("examples/shader_live/footage/Pexels_10872797.mp4", "10872797/10872797-hd_1920_1080_30fps.mp4",
                  "ff6fbba79f2478643b689d1c106c85caa5dc3dbc07ec5f492b628dc3c33c6aad", "road-through-sandy-desert-at-sunrise-10872797", "shader_live 01_Desert_Causeway_Sea"),
+    "32109503": ("examples/space_distortion/footage/Pexels_32109503.mp4", "32109503/13689429_1920_1080_25fps.mp4",
+                 "ead8e8f86dedf4e997639d658be741c7fa14db887de33940159f2c40e9c28225", "contemporary-dance-solo-outdoors-32109503", "space_distortion"),
+    "13607734": ("examples/space_distortion/footage/Pexels_13607734.mp4", "13607734/13607734-hd_1920_1080_24fps.mp4",
+                 "06335bd223cb9f80b6356ce9d1839e6da5b0790c9fc2a2aa973f14901efd427e", "dancer-in-tunnel-13607734", "space_distortion piece_tunnel"),
+    "5359146": ("examples/space_distortion/footage/Pexels_5359146.mp4", "5359146/5359146-hd_1920_1080_24fps.mp4",
+                "8d95137f6532ac2830331800fcf81ad45c3e8f9841f92140fbe1ba699957589e", "young-woman-dancing-and-lip-synching-5359146", "space_distortion piece_street"),
+    "8928132": ("examples/slit_scan/footage/Pexels_8928132.mp4", "8928132/8928132-hd_1920_1080_30fps.mp4",
+                "338da7c1fbd9598e198f5fb0d40c3136f8298cfa5f9192a711c110fe3566e6c0", "a-woman-dancing-on-the-sidewalk-8928132", "slit_scan"),
 }
 POSE = ("examples/fruit_physics/models/pose_landmarker_heavy.task",
         "https://storage.googleapis.com/mediapipe-models/pose_landmarker/pose_landmarker_heavy/float16/latest/pose_landmarker_heavy.task")

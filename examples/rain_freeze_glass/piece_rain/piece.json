@@ -1,0 +1,23 @@
+{
+  "name": "Liquid_Glass_Rain_Freeze",
+  "pexels": 7251765,
+  "credit": "MART PRODUCTION (Pexels 7251765, Pexels License)",
+  "source": "../../liquid_glass/footage/Pexels_7251765.mp4",
+  "start": 0,
+  "frames": 225,
+  "step": 1,
+  "fps_num": 25,
+  "fps_den": 1,
+  "rain_freeze": {
+    "freeze_frame": 64,
+    "brake_frames": 7,
+    "cyl_occ": [-1.726, 0.643, 0.513, 4.8],
+    "n_near": 24,
+    "n_hero": 116,
+    "n_mid": 240,
+    "n_micro": 300,
+    "ior": 1.333,
+    "dispersion": 0.009,
+    "seed": 2033
+  }
+}

@@ -1,0 +1,53 @@
+{
+ "name": "Vision_Quadtree_Concrete",
+ "pexels": 8928133,
+ "credit": "RDNE Stock project (Pexels 8928133, Pexels License)",
+ "source": "../footage/Pexels_8928133.mp4",
+ "start": 150,
+ "frames": 270,
+ "step": 1,
+ "hfov": 58.0,
+ "refine_focal": false,
+ "mask_dir": "work/solve_mask",
+ "solver": "homography",
+ "tilt": 90.0,
+ "plane": {
+  "frame": 100,
+  "roi": [
+   100,
+   860,
+   1820,
+   1080
+  ],
+  "anchor": [
+   960,
+   960
+  ],
+  "xdir": [
+   1400,
+   960
+  ],
+  "cam_h": 0.96,
+  "grid": 0.5,
+  "grid_n": 10,
+  "level": true
+ },
+ "sun": {
+  "az": 150.0,
+  "el": 65.0
+ },
+ "vision": {
+  "min_cell": 15,
+  "levels": 5,
+  "motion_decay": 0.82,
+  "split_thresh": 0.11,
+  "glyph_prob": 0.32,
+  "loupe_prob": 0.28,
+  "accent_rgb": [
+   0.92,
+   1.0,
+   0.28
+  ],
+  "vel_trigger": 2.4
+ }
+}

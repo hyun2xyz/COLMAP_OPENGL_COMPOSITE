@@ -1,0 +1,127 @@
+{
+ "name": "Liquid_Glass_Cloister",
+ "pexels": 36902358,
+ "credit": "Gothic Cathedral Cloister with Arched Walkway by Mark Holmes (Pexels 36902358, Pexels License)",
+ "source": "../footage/Pexels_36902358_Cloister.mp4",
+ "start": 4,
+ "frames": 245,
+ "step": 1,
+ "hfov": 74.0,
+ "refine_focal": true,
+ "sift": 5000,
+ "overlap": 12,
+ "smooth": 9,
+ "plane": {
+  "frame": 104,
+  "roi": [
+   860,
+   860,
+   1280,
+   1080
+  ],
+  "anchor": [
+   1060,
+   950
+  ],
+  "xdir": [
+   1231,
+   965
+  ],
+  "cam_h": 1.48,
+  "grid": 0.5,
+  "grid_n": 18,
+  "level": false,
+  "thresh": 0.008
+ },
+ "sun": {
+  "az": 16.0,
+  "el": 40.0
+ },
+ "occ_boxes": [
+  [-3.50, -2.28, -9.00, 14.00, 0.0, 4.5],
+  [-2.35, -1.96, -4.90, -4.35, 0.0, 4.5],
+  [-2.35, -1.96, -1.35, -0.80, 0.0, 4.5],
+  [-2.35, -1.96,  2.20,  2.75, 0.0, 4.5],
+  [ 0.80,  1.65, -4.98, -4.30, 0.0, 4.5],
+  [ 1.15,  1.68, -2.92, -2.55, 0.0, 4.5],
+  [ 0.78,  2.45, -1.45, -0.78, 0.0, 4.5],
+  [ 0.92,  2.50, -6.50, 12.00, 0.0, 0.80],
+  [ 0.78,  2.20,  2.15,  2.80, 0.0, 4.5],
+  [ 0.78,  2.20,  5.70,  6.35, 0.0, 4.5]
+ ],
+ "sculptures": [
+  {"pos": [-0.72, -5.55, 1.38, 0.50], "type": 0,  "yaw_deg":  16.0, "phase": 0.4, "bound": 0.58},
+  {"pos": [-1.36, -4.05, 1.34, 0.62], "type": 1,  "yaw_deg":  24.0, "phase": 1.3, "bound": 0.68},
+  {"pos": [-0.62, -2.05, 1.16, 0.80], "type": 2,  "yaw_deg":  14.0, "phase": 2.1, "bound": 0.98},
+  {"pos": [-1.42, -2.65, 1.48, 0.56], "type": 3,  "yaw_deg":  18.0, "phase": 0.9, "bound": 0.78},
+  {"pos": [-1.38, -0.60, 1.46, 0.68], "type": 4,  "yaw_deg":  12.0, "phase": 3.1, "bound": 0.92},
+  {"pos": [ 0.78,  0.20, 1.32, 0.82], "type": 5,  "yaw_deg": -20.0, "phase": 1.7, "bound": 1.12},
+  {"pos": [-0.28, -1.05, 2.26, 0.44], "type": 6,  "yaw_deg":  25.0, "phase": 4.2, "bound": 0.50},
+  {"pos": [-1.10,  0.95, 1.52, 0.70], "type": 7,  "yaw_deg":  20.0, "phase": 2.6, "bound": 0.78},
+  {"pos": [ 0.48,  1.85, 1.46, 0.72], "type": 8,  "yaw_deg": -16.0, "phase": 0.7, "bound": 0.90},
+  {"pos": [-1.18,  2.75, 1.38, 0.70], "type": 9,  "yaw_deg":  28.0, "phase": 5.0, "bound": 0.72},
+  {"pos": [-0.18,  2.35, 1.56, 0.96], "type": 10, "yaw_deg":  14.0, "phase": 1.1, "bound": 1.18}
+ ],
+ "glass": {
+  "ior": 1.45,
+  "dispersion": 0.012,
+  "tint": [
+   0.064,
+   0.024,
+   0.020
+  ],
+  "sunlit_col": [
+   1.0,
+   0.96,
+   0.88
+  ],
+  "floor_luma": [
+   0.04,
+   0.18
+  ],
+  "caustic_gain": 1.42,
+  "shadow_gain": 0.36,
+  "flute_freq": 56.0,
+  "flute_amp": 0.19,
+  "metaball_k": 0.32,
+  "proxy_dist": 6.5
+ },
+ "post": {
+  "focus_dist": 3.8,
+  "near_blur": 4.0,
+  "far_blur": 4.8,
+  "base_soft": 0.75,
+  "max_coc": 10.0,
+  "grain": 0.015,
+  "black_floor": 0.018,
+  "bead_x_clamp": [
+   -1.85,
+   0.68
+  ],
+  "bead_z_clamp": [
+   0.35,
+   2.55
+  ],
+  "bead_seed": 20261125
+ },
+ "breakdown": {
+  "compare_src": [
+   0,
+   95
+  ],
+  "process_start_src": 45,
+  "orbit_ang0": -125.0,
+  "orbit_dist": 11.5,
+  "orbit_z": 4.8,
+  "slow": {
+   "refract": [
+    0.5,
+    52
+   ],
+   "caustic": [
+    0.5,
+    52
+   ]
+  }
+ }
+}

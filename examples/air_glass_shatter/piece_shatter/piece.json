@@ -1,0 +1,22 @@
+{
+ "name": "Air_Glass_Shatter_Rewind",
+ "pexels": 7578547,
+ "credit": "Kindel Media (Pexels 7578547, Pexels License)",
+ "source": "../../lidar_scan/footage/Pexels_7578547.mp4",
+ "start": 120,
+ "frames": 240,
+ "step": 1,
+ "shatter": {
+  "pane_y": -0.45,
+  "crack_start": 6,
+  "shatter_frame": 43,
+  "freeze_dur_s": 1.35,
+  "rewind_start": 154,
+  "reassemble_frame": 222,
+  "n_shards": 280,
+  "n_micro": 560,
+  "ior": 1.52,
+  "dispersion": 0.020,
+  "seed": 2031
+ }
+}
